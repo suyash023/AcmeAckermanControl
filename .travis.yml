@@ -21,9 +21,22 @@ matrix:
       env: COMPILER=g++-5
 
 before_install:
+  - sudo apt-get update
   - pip install --user cpp-coveralls
 install:
   - sudo apt-get install -y -qq lcov
+  #install eigent
+  - sudo apt-get install libeigen3-dev
+  #install opencv
+  - git clone git clone https://github.com/Itseez/opencv.git
+  - git checkout 3.3.1
+  - cd opencv
+  - mkdir build
+  - cd build
+  - cmake -D CMAKE_BUILD_TYPE=RELEASE -D BUILD_EXAMPLES=OFF -D BUILD_opencv_apps=OFF -D BUILD_DOCS=OFF -D BUILD_PERF_TESTS=OFF -D BUILD_TESTS=OFF -D CMAKE_INSTALL_PREFIX=/usr/local ..
+  - make -j8
+  - sudo make install 
+
 script:
   - export CXX=$COMPILER;
   - mkdir build
