@@ -1,6 +1,7 @@
 # C++ Boilerplate
 [![Build Status](https://travis-ci.org/suyash023/AcmeAckermanControl.svg?branch=master)](https://travis-ci.org/suyash023/AcmeAckermanControl)
 [![Coverage Status](https://coveralls.io/repos/github/suyash023/AcmeAckermanControl/badge.svg?branch=master)](https://coveralls.io/github/suyash023/AcmeAckermanControl?branch=master)
+[![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
 ---
 
 ## Overview
