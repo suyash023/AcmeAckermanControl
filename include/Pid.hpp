@@ -1,7 +1,11 @@
 /**
  BSD 3-Clause License
+<<<<<<< HEAD
+ssssssss Copyright (c) 2019, Ishan Patel, Nakul Patel, Suyash Yeotikar
+=======
 
  Copyright (c) 2019, Ishan Patel, Nakul Patel, Suyash Yeotikar
+>>>>>>> 69a6cbbbbdffaf7e429ab28a94dba5ba788d0f0a
  All rights reserved.
 
  Redistribution and use in source and binary forms, with or without
@@ -30,7 +34,11 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
+<<<<<<< HEAD
+ * @file Pid.hpp
+=======
  * @file PID.hpp
+>>>>>>> 69a6cbbbbdffaf7e429ab28a94dba5ba788d0f0a
  *
  * @author Ishan Patel
  *
@@ -51,6 +59,113 @@
 #define INCLUDE_PID_HPP_
 
 #include <iostream>
+<<<<<<< HEAD
+#include <eigen3/Eigen/Core>
+
+/**
+ *
+ * @brief declaration of Pid class
+ *
+ */
+class Pid {
+private:
+	Eigen::MatrixXd kp;
+	Eigen::Matrix2d ki;
+	Eigen::Matrix2d kd;
+	Eigen::Vector3d lastError = Eigen::Vector3d::Zero();
+	Eigen::Vector3d errorSum = Eigen::Vector3d::Zero();
+public:
+	/**
+	 *
+	 * @brief getter method for kp gains
+	 *
+	 * @param none
+	 *
+	 * @return 2x3 matrix of kp gains
+	 *
+	 */
+	Eigen::MatrixXd getKp();
+
+	/**
+	 *
+	 * @brief getter method for ki gains
+	 *
+	 * @param none
+	 *
+	 * @return 2x3 matrix of ki gains
+	 *
+	 */
+	Eigen::MatrixXd getKi();
+
+	/**
+	 *
+	 * @brief getter method for kd gains
+	 *
+	 * @param none
+	 *
+	 * @return 2x3 matrix of kd gains
+	 *
+	 */
+	Eigen::MatrixXd getKd();
+
+	/**
+	 *
+	 * @brief setter method for kp gains
+	 *
+	 * @param kpIn 2X3 matrix of kp gains
+	 *
+	 * @return bool
+	 *
+	 */
+	Eigen::MatrixXd setKp(Eigen::MatrixXd kpIn);
+	/**
+	 *
+	 * @brief setter method for ki gains
+	 *
+	 * @param kiIn 2X3 matrix of ki gains
+	 *
+	 * @return bool
+	 *
+	 */
+	Eigen::MatrixXd setKi(Eigen::MatrixXd kiIn);
+
+	/**
+	 *
+	 * @brief setter method for kd gains
+	 *
+	 * @param kdIn 2X3 matrix of kd gains
+	 *
+	 * @return bool
+	 *
+	 */
+	Eigen::MatrixXd setKd(Eigen::MatrixXd kdIn);
+
+	/**
+	 *
+	 * @brief Estimate velocity and steering angle given target state and actual state
+	 *
+	 * @param targetState The desired state of the system (x,y,theta)
+	 *
+	 * @param actualState The actual state of the system (x,y,theta)
+	 *
+	 * @return vector of velocity and steering angle
+	 *
+	 */
+	Eigen::Vector2d getControllerOutput(Eigen::Vector3d targetState,
+			Eigen::Vector3d currentState);
+
+	/**
+	 *
+	 * @brief Reset the last error and sum of errors
+	 *
+	 * @param none
+	 *
+	 * @return none
+	 *
+	 */
+	void resetErrors();
+};
+=======
 #include <Eigen/Dense>
 
 /**
@@ -62,5 +177,6 @@ class Pid
 
 
 
+>>>>>>> 69a6cbbbbdffaf7e429ab28a94dba5ba788d0f0a
 
 #endif /* INCLUDE_PID_HPP_ */
