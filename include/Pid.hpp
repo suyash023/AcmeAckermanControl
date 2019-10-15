@@ -1,11 +1,7 @@
 /**
  BSD 3-Clause License
-<<<<<<< HEAD
-ssssssss Copyright (c) 2019, Ishan Patel, Nakul Patel, Suyash Yeotikar
-=======
 
  Copyright (c) 2019, Ishan Patel, Nakul Patel, Suyash Yeotikar
->>>>>>> 69a6cbbbbdffaf7e429ab28a94dba5ba788d0f0a
  All rights reserved.
 
  Redistribution and use in source and binary forms, with or without
@@ -34,11 +30,8 @@ ssssssss Copyright (c) 2019, Ishan Patel, Nakul Patel, Suyash Yeotikar
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
-<<<<<<< HEAD
- * @file Pid.hpp
-=======
  * @file PID.hpp
->>>>>>> 69a6cbbbbdffaf7e429ab28a94dba5ba788d0f0a
+ *
  *
  * @author Ishan Patel
  *
@@ -59,7 +52,6 @@ ssssssss Copyright (c) 2019, Ishan Patel, Nakul Patel, Suyash Yeotikar
 #define INCLUDE_PID_HPP_
 
 #include <iostream>
-<<<<<<< HEAD
 #include <eigen3/Eigen/Core>
 
 /**
@@ -165,18 +157,5 @@ public:
 	 */
 	void resetErrors();
 };
-=======
-#include <Eigen/Dense>
-
-/**
- *
- * @brief declaration of AckermanKinematicModel class
- *
- */
-class Pid
-
-
-
->>>>>>> 69a6cbbbbdffaf7e429ab28a94dba5ba788d0f0a
 
 #endif /* INCLUDE_PID_HPP_ */
