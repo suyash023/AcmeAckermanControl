@@ -47,7 +47,6 @@
 bool Map::SetStartCoordinates(cv::Point3f inputCoordinates) {
 }
 
-
 /**
  * @brief function to set Destination coordinates.
  * @param inputCoordinates Coordinates specific to destination on the map
@@ -110,6 +109,3 @@ bool Map::CheckValidCoordinates(cv::Point3f inputCoordinates);
  * or not.
  */
 bool Map::DisplayMapImage();
-
-
-
