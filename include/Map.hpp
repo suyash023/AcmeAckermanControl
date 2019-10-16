@@ -29,15 +29,50 @@
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * @file Map.cpp
+ * @file Map.hpp
  * @date 12th October 2019
- * @author Suyash Yeotikar (driver)
- * @brief Map module source file containing function implementations.
- */
+ * @author Suyash Yeotikar (driver), Nakul Patel (Navigator), Ishan Patel (Design Keeper)
+ * @brief Map module header containing function definitions and variables.
+ * @mainpage
+ **/
+
+#ifndef INCLUDE_MAP_HPP_
+#define INCLUDE_MAP_HPP_
+
+#include <string>
+#include <opencv2/opencv.hpp>
+
+class Map {
+ private:
+    cv::Point mapBounds;
+    cv::Mat robotImage;
+    cv::Mat currMapImage;
+    cv::Point3f startCoords;
+    cv::Point2f destinationCoords;
+    cv::Point2f currCoords;
+    std::string robotImageLocation = "/home/suyash/Desktop/"
+            "software_dev_for_robotics/midterm-project/AcmeAckermanControl/"
+            "images/Robot_image.png";
+
+ public:
+    bool SetStartCoordinates(cv::Point3f inputCoordinates);
+
+    bool SetDestinationCoordinates(cv::Point3f inputCoordinates);
+
+    bool UpdateRobotLocation(cv::Point3f coordinates);
+
+    cv::Point3f GetRobotCoordinates();
+
+    bool InitializeMap(cv::Point mapBounds);
+
+    bool CheckReachedDestination();
+
+    bool CheckValidCoordinates(cv::Point3f inputCoordinates);
+
+    bool DisplayMapImage();
+
+    bool LoadRobotImage();
+};
 
 
-#include <gtest/gtest.h>
-
-TEST(dummy, should_pass) {
-  EXPECT_EQ(1, 1);
-}
+#endif  // INCLUDE_MAP_HPP_
