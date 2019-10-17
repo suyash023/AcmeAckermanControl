@@ -86,5 +86,5 @@ cv::Point3f AckermanKinematicModel::calcAckermanParameters() {
 bool AckermanKinematicModel::checkAngleConstraints() {
 
 }
-};
+
 
