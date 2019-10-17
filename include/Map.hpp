@@ -48,8 +48,8 @@ class Map {
     cv::Mat robotImage;
     cv::Mat currMapImage;
     cv::Point3f startCoords;
-    cv::Point2f destinationCoords;
-    cv::Point2f currCoords;
+    cv::Point3f destinationCoords;
+    cv::Point3f currCoords;
     std::string robotImageLocation = "/home/suyash/Desktop/"
             "software_dev_for_robotics/midterm-project/AcmeAckermanControl/"
             "images/Robot_image.png";
