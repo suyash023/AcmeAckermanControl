@@ -45,6 +45,9 @@
  **/
 
 bool Map::SetStartCoordinates(cv::Point3f inputCoordinates) {
+  bool b = UpdateRobotLocation(inputCoordinates);
+  return b;
+
 }
 
 /**
@@ -73,6 +76,7 @@ bool Map::UpdateRobotLocation(cv::Point3f coordinates) {
  * @return the current position (x,y) and heading angle
  */
 cv::Point3f Map::GetRobotCoordinates() {
+  return currCoords;
 }
 
 /**
@@ -103,6 +107,7 @@ bool Map::CheckReachedDestination() {
  * within bounds or not
  */
 bool Map::CheckValidCoordinates(cv::Point3f inputCoordinates) {
+
 }
 
 /**
