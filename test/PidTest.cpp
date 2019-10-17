@@ -109,10 +109,10 @@ TEST(GetControllerOutputTest, testGetControllerOutputValid) {
 	bool b1 = testObj.setKp(kp1);
 	Eigen::Matrix<double, 2, 3> ki1;
 	ki1 << 1, 2, 3, 1, 1, 1;
-	bool b1 = testObj.setKi(ki1);
+	bool b2 = testObj.setKi(ki1);
 	Eigen::Matrix<double, 2, 3> kd1;
 	kd1 << 1, 2, 3, 1, 1, 1;
-	bool b1 = testObj.setKd(kd1);
+	bool b3 = testObj.setKd(kd1);
 	Eigen::Matrix<double, 2, 3> kp = testObj.getKp();
 	Eigen::Matrix<double, 2, 3> ki = testObj.getKi();
 	Eigen::Matrix<double, 2, 3> kd = testObj.getKd();
