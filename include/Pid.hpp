@@ -61,9 +61,9 @@
  */
 class Pid {
 private:
-	Eigen::MatrixXd kp;
-	Eigen::Matrix2d ki;
-	Eigen::Matrix2d kd;
+	Eigen::Matrix<double, 2, 3> kp;
+	Eigen::Matrix<double, 2, 3> ki;
+	Eigen::Matrix<double, 2, 3> kd;
 	Eigen::Vector3d lastError = Eigen::Vector3d::Zero();
 	Eigen::Vector3d errorSum = Eigen::Vector3d::Zero();
 public:
@@ -76,7 +76,7 @@ public:
 	 * @return 2x3 matrix of kp gains
 	 *
 	 */
-	Eigen::MatrixXd getKp();
+	Eigen::Matrix<double, 2, 3> getKp();
 
 	/**
 	 *
@@ -87,7 +87,7 @@ public:
 	 * @return 2x3 matrix of ki gains
 	 *
 	 */
-	Eigen::MatrixXd getKi();
+	Eigen::Matrix<double, 2, 3> getKi();
 
 	/**
 	 *
@@ -98,7 +98,7 @@ public:
 	 * @return 2x3 matrix of kd gains
 	 *
 	 */
-	Eigen::MatrixXd getKd();
+	Eigen::Matrix<double, 2, 3> getKd();
 
 	/**
 	 *
@@ -109,7 +109,7 @@ public:
 	 * @return bool
 	 *
 	 */
-	Eigen::MatrixXd setKp(Eigen::MatrixXd kpIn);
+	bool setKp(Eigen::Matrix<double, 2, 3> kpIn);
 	/**
 	 *
 	 * @brief setter method for ki gains
@@ -119,7 +119,7 @@ public:
 	 * @return bool
 	 *
 	 */
-	Eigen::MatrixXd setKi(Eigen::MatrixXd kiIn);
+	bool setKi(Eigen::Matrix<double, 2, 3> kiIn);
 
 	/**
 	 *
@@ -130,7 +130,7 @@ public:
 	 * @return bool
 	 *
 	 */
-	Eigen::MatrixXd setKd(Eigen::MatrixXd kdIn);
+	bool setKd(Eigen::Matrix<double, 2, 3> kdIn);
 
 	/**
 	 *

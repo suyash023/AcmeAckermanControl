@@ -51,27 +51,27 @@
 #include <eigen3/Eigen/Core>
 
 
-Eigen::MatrixXd Pid::getKp() {
+Eigen::Matrix<double, 2, 3> Pid::getKp() {
 
 }
 
-Eigen::MatrixXd Pid::getKi() {
+Eigen::Matrix<double, 2, 3> Pid::getKi() {
 
 }
 
-Eigen::MatrixXd Pid::getKd() {
+Eigen::Matrix<double, 2, 3> Pid::getKd() {
 
 }
 
-Eigen::MatrixXd Pid::setKp(Eigen::MatrixXd kpIn) {
+bool Pid::setKp(Eigen::Matrix<double, 2, 3> kpIn) {
 
 }
 
-Eigen::MatrixXd Pid::setKi(Eigen::MatrixXd kiIn) {
+bool Pid::setKi(Eigen::Matrix<double, 2, 3> kiIn) {
 
 }
 
-Eigen::MatrixXd Pid::setKd(Eigen::MatrixXd kdIn) {
+bool Pid::setKd(Eigen::Matrix<double, 2, 3> kdIn) {
 
 }
 
