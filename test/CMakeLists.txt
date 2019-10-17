@@ -5,6 +5,11 @@ add_executable(
     cpp-test
     main.cpp
     MapTest.cpp
+    AckermanModelTest.cpp
+    PidTest.cpp
+    ../app/Map.cpp
+    ../app/AckermanKinematicModel.cpp
+    ../app/Pid.cpp
 )
 
 target_include_directories(cpp-test PUBLIC ../vendor/googletest/googletest/include 
