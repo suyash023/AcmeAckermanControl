@@ -80,6 +80,7 @@ cv::Point3f Map::GetRobotCoordinates() {
  * Robot image is loaded and stored in robot image
  * Map will be initialized based on bounds.
  * Function returns the map image.
+ * @param none
  * @return Mat initialized map image with robot at one corner.
  */
 bool Map::InitializeMap(cv::Point mapBounds) {
@@ -89,6 +90,7 @@ bool Map::InitializeMap(cv::Point mapBounds) {
  * @brief function to check if robot has reached the set target point or not.
  * Function compares the the current location and destination location.
  * Distance should be 2 for robot to have reached location
+ * @param none
  * @return true or false depending on if robot has reached location
  */
 bool Map::CheckReachedDestination() {
@@ -99,6 +101,7 @@ bool Map::CheckReachedDestination() {
  * based on if they are within the bounds of map or not.
  * Use transformation matrices to translate and rotate points of rectangle
  * and then determine if they are within bounds.
+ * @param Point3f input coordinates to be checkes if they are valid or not
  * @return bool true or false depending on if the coordinates are
  * within bounds or not
  */
@@ -108,6 +111,7 @@ bool Map::CheckValidCoordinates(cv::Point3f inputCoordinates) {
 /**
  * @brief Function to display map with the
  * updated location of the robot
+ * @param none
  * @return bool true or false depnding on map is successfully displayed
  * or not.
  */
