@@ -82,7 +82,8 @@ cv::Point3f Map::GetRobotCoordinates() {
  * Function returns the map image.
  * @return Mat initialized map image with robot at one corner.
  */
-bool Map::InitializeMap(cv::Point mapBounds);
+bool Map::InitializeMap(cv::Point mapBounds) {
+}
 
 /**
  * @brief function to check if robot has reached the set target point or not.
@@ -90,7 +91,8 @@ bool Map::InitializeMap(cv::Point mapBounds);
  * Distance should be 2 for robot to have reached location
  * @return true or false depending on if robot has reached location
  */
-bool Map::CheckReachedDestination();
+bool Map::CheckReachedDestination() {
+}
 
 /**
  * @brief check if the input coordinates are valid,
@@ -100,7 +102,8 @@ bool Map::CheckReachedDestination();
  * @return bool true or false depending on if the coordinates are
  * within bounds or not
  */
-bool Map::CheckValidCoordinates(cv::Point3f inputCoordinates);
+bool Map::CheckValidCoordinates(cv::Point3f inputCoordinates) {
+}
 
 /**
  * @brief Function to display map with the
@@ -108,4 +111,5 @@ bool Map::CheckValidCoordinates(cv::Point3f inputCoordinates);
  * @return bool true or false depnding on map is successfully displayed
  * or not.
  */
-bool Map::DisplayMapImage();
+bool Map::DisplayMapImage() {
+}
