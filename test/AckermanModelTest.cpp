@@ -95,13 +95,11 @@ TEST(SetCarStateTest, testSetCarStateValid) {
   state1.y = 50;
   state1.z = 30;
   bool b1 = testObj.setCarState(state1);
+  cv::Point3f state = testObj.getCarState();
   EXPECT_EQ(true, b1);
-  cv::Point3f state2;
-  state2.x = -20;
-  state2.y = 30;
-  state2.z = 60;
-  bool b2 = testObj.setCarState(state2);
-  EXPECT_NE(true, b2);
+  EXPECT_EQ(state.x, state1.x);
+  EXPECT_EQ(state.y, state1.y);
+  EXPECT_EQ(state.z, state1.z);
 }
 
 /**
@@ -114,13 +112,16 @@ TEST(SetCarStateTest, testSetCarStateValid) {
 TEST(CalcAckermanParameterTest, testCalcAckermanParameter) {
   AckermanKinematicModel testObj = AckermanKinematicModel();
   bool b1 = testObj.setWheelBase(2.0);
+  EXPECT_EQ(true, b1);
   Eigen::Vector2d vec(50.0, 10.0);
   bool b2 = testObj.setCarVelocityAndSteeringAngle(vec);
+  EXPECT_EQ(true, b2);
   cv::Point3f initialState;
   initialState.x = 0.0;
   initialState.y = 0.0;
   initialState.z = 0.0;
   bool b3 = testObj.setCarState(initialState);
+  EXPECT_EQ(true, b3);
   cv::Point3f updatedState = testObj.calcAckermanParameters();
   EXPECT_NEAR(49.852, updatedState.x, 0.5);
   EXPECT_NEAR(3.845, updatedState.y, 0.5);
