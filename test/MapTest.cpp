@@ -70,7 +70,7 @@ TEST(SetStartCoordinates, testSetStartCoordinatesValid ) {
 
 TEST(SetStartCoordinates, testSetStartCoordinatesInvalid) {
     Map testObj = Map();
-    testObj.InitializeMap(cv::Point(500, 500));
+    testObj.InitializeMap(cv::Point(500, 500), 2.5, 3.5);
     cv::Point3f currRobotPoint = testObj.GetRobotCoordinates();
     cv::Point3f testPoint1;
     testPoint1.x = -1;
@@ -102,7 +102,7 @@ TEST(SetStartCoordinates, testSetStartCoordinatesInvalid) {
 
 TEST(InitializeMap, testInitializeMapValid) {
     Map testObj = Map();
-    ASSERT_TRUE(testObj.InitializeMap(cv::Point(500, 500)));
+    ASSERT_TRUE(testObj.InitializeMap(cv::Point(500, 500), 2.5, 3.5));
     ASSERT_TRUE(testObj.DisplayMapImage());
 }
 
@@ -116,7 +116,7 @@ TEST(InitializeMap, testInitializeMapValid) {
 
 TEST(InitializeMap, testInitializeMapInvalid) {
     Map testObj = Map();
-    ASSERT_TRUE(testObj.InitializeMap(cv::Point(-100, -100)));
+    ASSERT_TRUE(testObj.InitializeMap(cv::Point(-100, -100), 2.5 , 3.5));
     ASSERT_FALSE(testObj.DisplayMapImage());
 }
 
@@ -130,7 +130,7 @@ TEST(InitializeMap, testInitializeMapInvalid) {
 
 TEST(SetDestinationCoordinates, testSetDestinationCoordinatesValid ) {
     Map testObj = Map();
-    testObj.InitializeMap(cv::Point(500, 500));
+    testObj.InitializeMap(cv::Point(500, 500), 2.5, 3.5);
     cv::Point3f testPoint;
     testPoint.x = 10;
     testPoint.y = 10;
@@ -148,7 +148,7 @@ TEST(SetDestinationCoordinates, testSetDestinationCoordinatesValid ) {
 
 TEST(SetDestinationCoordinates, testSetDestinationCoordinatesInvalid) {
     Map testObj = Map();
-    testObj.InitializeMap(cv::Point(500, 500));
+    testObj.InitializeMap(cv::Point(500, 500), 2.5, 3.5);
     cv::Point3f currRobotPoint = testObj.GetRobotCoordinates();
     cv::Point3f testPoint1;
     testPoint1.x = -1;
