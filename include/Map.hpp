@@ -45,14 +45,10 @@
 class Map {
  private:
     cv::Point mapBounds;
-    cv::Mat robotImage;
     cv::Mat currMapImage;
     cv::Point3f startCoords;
     cv::Point3f destinationCoords;
     cv::Point3f currCoords;
-    std::string robotImageLocation = "/home/suyash/Desktop/"
-            "software_dev_for_robotics/midterm-project/AcmeAckermanControl/"
-            "images/Robot_image.png";
 
  public:
     bool SetStartCoordinates(cv::Point3f inputCoordinates);
@@ -71,7 +67,6 @@ class Map {
 
     bool DisplayMapImage();
 
-    bool LoadRobotImage();
 };
 
 
