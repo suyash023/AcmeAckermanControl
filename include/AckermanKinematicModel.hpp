@@ -112,7 +112,7 @@ class AckermanKinematicModel {
    * @return carState
    *
    */
-  double getCarState();
+  cv::Point3f getCarState();
 
   /**
    *

@@ -64,7 +64,7 @@ double AckermanKinematicModel::getSteeringAngle() {
 double AckermanKinematicModel::getCarVelocity() {
 
 }
-double AckermanKinematicModel::getCarState() {
+cv::Point3f AckermanKinematicModel::getCarState() {
 
 }
 bool AckermanKinematicModel::setWheelBase(double l) {
