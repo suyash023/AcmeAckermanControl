@@ -51,24 +51,46 @@
 #include <eigen3/Eigen/Core>
 
 
-Eigen::Matrix<double, 2, 3> Pid::getKp() {
+namespace Eigen
+{
+    auto begin(Matrix2d const& m) {
+        return m.data();
+    }
+    auto end(Matrix2d const& m) {
+        return m.data()+m.size();
+    }
+}
 
+Eigen::Matrix<double, 2, 3> Pid::getKp() {
+    return kp;
 }
 
 Eigen::Matrix<double, 2, 3> Pid::getKi() {
-
+    return ki;
 }
 
 Eigen::Matrix<double, 2, 3> Pid::getKd() {
-
+    return kd;
 }
 
 bool Pid::setKp(Eigen::Matrix<double, 2, 3> kpIn) {
-
+    for ( auto element : kpIn ) {
+        if ( element < 0 ) {
+            return false;
+        }
+    }
+    kp = kpIn;
+    return true;
 }
 
 bool Pid::setKi(Eigen::Matrix<double, 2, 3> kiIn) {
-
+    for ( auto element : kiIn ) {
+        if ( element < 0 ) {
+            return false;
+        }
+    }
+    ki = kiIn;
+    return true;
 }
 
 bool Pid::setKd(Eigen::Matrix<double, 2, 3> kdIn) {
