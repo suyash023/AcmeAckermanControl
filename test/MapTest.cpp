@@ -116,7 +116,7 @@ TEST(InitializeMap, testInitializeMapValid) {
 
 TEST(InitializeMap, testInitializeMapInvalid) {
     Map testObj = Map();
-    ASSERT_TRUE(testObj.InitializeMap(cv::Point(-100, -100), 2.5 , 3.5));
+    ASSERT_FALSE(testObj.InitializeMap(cv::Point(-100, -100), 2.5 , 3.5));
     ASSERT_FALSE(testObj.DisplayMapImage());
 }
 
