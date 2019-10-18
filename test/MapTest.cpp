@@ -48,7 +48,7 @@
 
 TEST(SetStartCoordinates, testSetStartCoordinatesValid ) {
     Map testObj = Map();
-    testObj.InitializeMap(cv::Point(500, 500));
+    testObj.InitializeMap(cv::Point(500, 500), 2.5, 3.5);
     cv::Point3f testPoint;
     testPoint.x = 100;
     testPoint.y = 100;

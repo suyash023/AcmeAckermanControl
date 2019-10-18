@@ -49,6 +49,8 @@ class Map {
     cv::Point3f startCoords;
     cv::Point3f destinationCoords;
     cv::Point3f currCoords;
+    double width;
+    double length;
 
  public:
     bool SetStartCoordinates(cv::Point3f inputCoordinates);
@@ -59,14 +61,14 @@ class Map {
 
     cv::Point3f GetRobotCoordinates();
 
-    bool InitializeMap(cv::Point mapBounds);
+    bool InitializeMap(cv::Point mapBounds, double robotLength,
+            double robotWidth);
 
     bool CheckReachedDestination();
 
     bool CheckValidCoordinates(cv::Point3f inputCoordinates);
 
     bool DisplayMapImage();
-
 };
 
 

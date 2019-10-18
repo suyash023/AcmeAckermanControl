@@ -46,7 +46,6 @@
 bool Map::SetStartCoordinates(cv::Point3f inputCoordinates) {
   bool b = UpdateRobotLocation(inputCoordinates);
   return b;
-
 }
 
 /**
@@ -101,8 +100,9 @@ cv::Point3f Map::GetRobotCoordinates() {
  * @param none
  * @return Mat initialized map image with robot at one corner.
  */
-bool Map::InitializeMap(cv::Point mapBounds) {
 
+bool Map::InitializeMap(cv::Point mapBounds, double robotLength,
+        double robotWidth) {
 }
 
 /**
