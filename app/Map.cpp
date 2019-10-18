@@ -101,7 +101,7 @@ cv::Point3f Map::GetRobotCoordinates() {
  * @return Mat initialized map image with robot at one corner.
  */
 
-bool Map::InitializeMap(cv::Point mapBounds, double robotLength,
+bool Map::InitializeMap(cv::Point inMapBounds, double robotLength,
         double robotWidth) {
 }
 

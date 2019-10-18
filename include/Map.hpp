@@ -61,7 +61,7 @@ class Map {
 
     cv::Point3f GetRobotCoordinates();
 
-    bool InitializeMap(cv::Point mapBounds, double robotLength,
+    bool InitializeMap(cv::Point inMapBounds, double robotLength,
             double robotWidth);
 
     bool CheckReachedDestination();
