@@ -35,7 +35,6 @@
  * @brief Map module source file containing function implementations.
  */
 
-
 #include "Map.hpp"
 
 /**
@@ -56,6 +55,13 @@ bool Map::SetStartCoordinates(cv::Point3f inputCoordinates) {
  * @return bool true or false depending on value was set or not
  */
 bool Map::SetDestinationCoordinates(cv::Point3f inputCoordinates) {
+  bool valid = CheckValidCoordinates(inputCoordinates);
+  if (valid) {
+    destinationCoords = inputCoordinates;
+    return true;
+  } else {
+    return false;
+  }
 }
 
 /**
@@ -66,8 +72,16 @@ bool Map::SetDestinationCoordinates(cv::Point3f inputCoordinates) {
  * need to be set so that it is reflected in the map
  */
 bool Map::UpdateRobotLocation(cv::Point3f coordinates) {
-}
+  bool val = CheckValidCoordinates(coordinates);
+  if (val) {
 
+
+
+  } else {
+    std::cout << "Could not update the coordinates." << std::endl;
+    return false;
+  }
+}
 
 /**
  * @brief function to get the current robot coordinates in map.
@@ -88,6 +102,7 @@ cv::Point3f Map::GetRobotCoordinates() {
  * @return Mat initialized map image with robot at one corner.
  */
 bool Map::InitializeMap(cv::Point mapBounds) {
+
 }
 
 /**
@@ -98,6 +113,11 @@ bool Map::InitializeMap(cv::Point mapBounds) {
  * @return true or false depending on if robot has reached location
  */
 bool Map::CheckReachedDestination() {
+  if (currCoords == destinationCoords) {
+    return true;
+  } else {
+    return false;
+  }
 }
 
 /**
@@ -110,7 +130,10 @@ bool Map::CheckReachedDestination() {
  * within bounds or not
  */
 bool Map::CheckValidCoordinates(cv::Point3f inputCoordinates) {
+  float tempX = inputCoordinates.x;
+  float tempY = inputCoordinates.y;
 
+  return false;
 }
 
 /**
@@ -121,4 +144,16 @@ bool Map::CheckValidCoordinates(cv::Point3f inputCoordinates) {
  * or not.
  */
 bool Map::DisplayMapImage() {
+  try {
+    /// Create a window for display.
+    cv::namedWindow("Display window", cv::WINDOW_AUTOSIZE);
+    /// Show our image inside it
+    cv::imshow("Display window", currMapImage);
+    cv::waitKey(0);
+    return true;
+  } catch (cv::Exception& e) {
+    std::cout << "Exception: failed to display image." << e.what();
+    return false;
+  }
 }
+
