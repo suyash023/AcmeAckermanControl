@@ -134,7 +134,7 @@ TEST(SetDestinationCoordinates, testSetDestinationCoordinatesValid ) {
     cv::Point3f testPoint;
     testPoint.x = 10;
     testPoint.y = 10;
-    testPoint.z = (3.14)/2;
+    testPoint.z = 90;
     ASSERT_TRUE(testObj.SetDestinationCoordinates(testPoint));
 }
 
