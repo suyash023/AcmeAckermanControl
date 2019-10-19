@@ -51,12 +51,11 @@
 #include <eigen3/Eigen/Core>
 
 
-namespace Eigen
-{
-    auto begin(Matrix2d const& m) {
+namespace Eigen {
+    auto begin(Eigen::Matrix<double, 2, 3> const& m) {
         return m.data();
     }
-    auto end(Matrix2d const& m) {
+    auto end(Eigen::Matrix<double, 2, 3> const& m) {
         return m.data()+m.size();
     }
 }
@@ -94,13 +93,29 @@ bool Pid::setKi(Eigen::Matrix<double, 2, 3> kiIn) {
 }
 
 bool Pid::setKd(Eigen::Matrix<double, 2, 3> kdIn) {
-
+    for ( auto element : kdIn ) {
+        if ( element < 0 ) {
+            return false;
+        }
+    }
+    kd = kdIn;
+    return true;
 }
 
-Eigen::Vector2d Pid::getControllerOutput(Eigen::Vector3d targetState, Eigen::Vector3d currentState) {
-
+Eigen::Vector2d Pid::getControllerOutput(
+        Eigen::Vector3d targetState, Eigen::Vector3d currentState) {
+    Eigen::Vector3d error;
+    Eigen::Vector3d errorDiff;
+    Eigen::Vector2d controlOut;
+    error = targetState - currentState;
+    errorDiff = error - lastError;
+    errorSum = errorSum + error;
+    controlOut = kp*error + ki*errorSum + kd*errorDiff;
+    lastError = error;
+    return controlOut;
 }
 
-void Pid::resetErrors(){
-
+void Pid::resetErrors() {
+    lastError = Eigen::Vector3d::Zero();
+    errorSum = Eigen::Vector3d::Zero();
 }
