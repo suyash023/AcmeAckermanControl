@@ -53,38 +53,85 @@
 
 
 double AckermanKinematicModel::getWheelBase() {
-
+  return wheelBase;
 }
+
 double AckermanKinematicModel::getAxleWidth() {
-
+  return axleWidth;
 }
+
 double AckermanKinematicModel::getSteeringAngle() {
-
+  return steeringAngle;
 }
+
 double AckermanKinematicModel::getCarVelocity() {
-
+  return carVelocity;
 }
+
 cv::Point3f AckermanKinematicModel::getCarState() {
+  return carState;
 
 }
+
 bool AckermanKinematicModel::setWheelBase(double l) {
-
+  bool checkWheelBase = false;
+  if (l >= 0) {
+	wheelBase = l;
+	checkWheelBase = true;
+  }
+  return checkWheelBase;
 }
+
 bool AckermanKinematicModel::setAxleWidth(double w) {
-
+  bool checkAxleWidth = false;
+  if (w >= 0) {
+	axleWidth = w;
+	checkAxleWidth = true;
+  }
+  return checkAxleWidth;
 }
+
 bool AckermanKinematicModel::setCarVelocityAndSteeringAngle(
-    Eigen::Vector2d controllerOutput) {
-  return false;
+		Eigen::Vector2d controllerOutput) {
+  if (controllerOutput(0) > 100) {
+	carVelocity = 100;
+  }
+  else {
+	carVelocity = controllerOutput(0);
+  }
+  bool checkSteeringAngle = false;
+  if ((controllerOutput(1) >= 0) && (controllerOutput(1) <= 45)) {
+	steeringAngle = controllerOutput(1);
+	checkSteeringAngle = true;
+  }
+  return checkSteeringAngle;
 }
 bool AckermanKinematicModel::setCarState(cv::Point3f state) {
-
+	carState = state;
+	cv::Point3f checkState = AckermanKinematicModel::getCarState();
+	bool checkCarState = false;
+	if ((checkState.x==state.x) && (checkState.y==state.y) && (checkState.z==state.z)) {
+		checkCarState = true;
+	}
+	return checkCarState;
 }
 cv::Point3f AckermanKinematicModel::calcAckermanParameters() {
-
+	double deltaTheta =  (carVelocity/wheelBase) * std::tan(steeringAngle);
+	double deltaX = carVelocity * std::cos(carState.z + deltaTheta);
+	double deltaY = carVelocity * std::sin(carState.z + deltaTheta);
+    carState.x = carState.x + deltaX;
+    carState.y = carState.y + deltaY;
+    carState.z = carState.z + deltaTheta;
+    return carState;
 }
 bool AckermanKinematicModel::checkAngleConstraints() {
-
+  double innerSteerAngle = std::atan((2 * wheelBase * std::sin(steeringAngle)) / (2*wheelBase*std::cos(steeringAngle) - axleWidth*std::sin(steeringAngle)));
+  double outerSteerAngle = std::atan((2 * wheelBase * std::sin(steeringAngle)) / (2*wheelBase*std::cos(steeringAngle) + axleWidth*std::sin(steeringAngle)));
+  bool checkAngle = false;
+  if ((innerSteerAngle <= 45) && (outerSteerAngle <= 45)) {
+	  checkAngle = true;
+  }
+  return checkAngle;
 }
 
 
