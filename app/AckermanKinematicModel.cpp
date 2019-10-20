@@ -93,19 +93,21 @@ bool AckermanKinematicModel::setAxleWidth(double w) {
 
 bool AckermanKinematicModel::setCarVelocityAndSteeringAngle(
 		Eigen::Vector2d controllerOutput) {
-  if (controllerOutput(0) > 100) {
-	carVelocity = 100;
+  if (controllerOutput(0) > 1000) {
+	carVelocity = 1000;
   }
   else {
 	carVelocity = controllerOutput(0);
   }
-  bool checkSteeringAngle = false;
-  if ((controllerOutput(1) >= 0) && (controllerOutput(1) <= 45)) {
-	steeringAngle = controllerOutput(1);
-	checkSteeringAngle = true;
+  steeringAngle = controllerOutput(1);
+  bool checkSteeringAngle = checkAngleConstraints();
+  bool setSteeringAngle = false;
+  if (checkSteeringAngle==true) {
+	setSteeringAngle = true;
   }
   return checkSteeringAngle;
 }
+
 bool AckermanKinematicModel::setCarState(cv::Point3f state) {
 	carState = state;
 	cv::Point3f checkState = AckermanKinematicModel::getCarState();
@@ -117,11 +119,11 @@ bool AckermanKinematicModel::setCarState(cv::Point3f state) {
 }
 cv::Point3f AckermanKinematicModel::calcAckermanParameters() {
 	double deltaTheta =  (carVelocity/wheelBase) * std::tan(steeringAngle);
-	double deltaX = carVelocity * std::cos(carState.z + deltaTheta);
-	double deltaY = carVelocity * std::sin(carState.z + deltaTheta);
+	double deltaX = carVelocity * std::cos(carState.z + (deltaTheta*dt));
+	double deltaY = carVelocity * std::sin(carState.z + (deltaTheta*dt));
     carState.x = carState.x + deltaX;
     carState.y = carState.y + deltaY;
-    carState.z = carState.z + deltaTheta;
+    carState.z = carState.z + deltaTheta*dt;
     return carState;
 }
 bool AckermanKinematicModel::checkAngleConstraints() {
