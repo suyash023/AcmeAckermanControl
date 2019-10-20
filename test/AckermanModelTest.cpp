@@ -123,9 +123,9 @@ TEST(CalcAckermanParameterTest, testCalcAckermanParameter) {
   bool b3 = testObj.setCarState(initialState);
   EXPECT_EQ(true, b3);
   cv::Point3f updatedState = testObj.calcAckermanParameters();
-  EXPECT_NEAR(-43.854, updatedState.x, 0.5);
-  EXPECT_NEAR(-24.01, updatedState.y, 0.5);
-  EXPECT_NEAR(16.209, updatedState.z, 0.5);
+  EXPECT_NEAR(0.81052, updatedState.x, 0.05);
+  EXPECT_NEAR(0.81041, updatedState.y, 0.05);
+  EXPECT_NEAR(0.016209, updatedState.z, 0.05);
 }
 
 /**
