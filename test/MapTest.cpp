@@ -47,17 +47,17 @@
  */
 
 TEST(SetStartCoordinates, testSetStartCoordinatesValid ) {
-    Map testObj = Map();
+  Map testObj = Map();
   testObj.InitializeMap(cv::Point(500, 500), 3.5, 2.5);
-    cv::Point3f testPoint;
-    testPoint.x = 100;
-    testPoint.y = 100;
+  cv::Point3f testPoint;
+  testPoint.x = 100;
+  testPoint.y = 100;
   testPoint.z = 30;
-    ASSERT_TRUE(testObj.SetStartCoordinates(testPoint));
-    cv::Point3f currRobotPointNew = testObj.GetRobotCoordinates();
-    ASSERT_EQ(currRobotPointNew.x, testPoint.x);
-    ASSERT_EQ(currRobotPointNew.y, testPoint.y);
-    ASSERT_EQ(currRobotPointNew.z, testPoint.z);
+  ASSERT_TRUE(testObj.SetStartCoordinates(testPoint));
+  cv::Point3f currRobotPointNew = testObj.GetRobotCoordinates();
+  ASSERT_EQ(currRobotPointNew.x, testPoint.x);
+  ASSERT_EQ(currRobotPointNew.y, testPoint.y);
+  ASSERT_EQ(currRobotPointNew.z, testPoint.z);
 }
 
 /**
@@ -69,27 +69,27 @@ TEST(SetStartCoordinates, testSetStartCoordinatesValid ) {
  */
 
 TEST(SetStartCoordinates, testSetStartCoordinatesInvalid) {
-    Map testObj = Map();
-    testObj.InitializeMap(cv::Point(500, 500), 2.5, 3.5);
-    cv::Point3f currRobotPoint = testObj.GetRobotCoordinates();
-    cv::Point3f testPoint1;
-    testPoint1.x = -1;
-    testPoint1.y = -1;
-    testPoint1.z = 0;
-    ASSERT_FALSE(testObj.SetStartCoordinates(testPoint1));
-    cv::Point3f currRobotPointNew = testObj.GetRobotCoordinates();
-    ASSERT_EQ(currRobotPoint.x, currRobotPointNew.x);
+  Map testObj = Map();
+  testObj.InitializeMap(cv::Point(500, 500), 2.5, 3.5);
+  cv::Point3f currRobotPoint = testObj.GetRobotCoordinates();
+  cv::Point3f testPoint1;
+  testPoint1.x = -1;
+  testPoint1.y = -1;
+  testPoint1.z = 0;
+  ASSERT_FALSE(testObj.SetStartCoordinates(testPoint1));
+  cv::Point3f currRobotPointNew = testObj.GetRobotCoordinates();
+  ASSERT_EQ(currRobotPoint.x, currRobotPointNew.x);
   ASSERT_EQ(currRobotPoint.y, currRobotPointNew.y);
-    ASSERT_EQ(currRobotPoint.z, currRobotPointNew.z);
-    cv::Point3f testPoint2;
-    testPoint2.x = 500;
-    testPoint2.y = 500;
-    testPoint2.z = 0;
-    ASSERT_FALSE(testObj.SetStartCoordinates(testPoint1));
-    currRobotPointNew = testObj.GetRobotCoordinates();
-    ASSERT_EQ(currRobotPoint.x, currRobotPointNew.x);
+  ASSERT_EQ(currRobotPoint.z, currRobotPointNew.z);
+  cv::Point3f testPoint2;
+  testPoint2.x = 500;
+  testPoint2.y = 500;
+  testPoint2.z = 0;
+  ASSERT_FALSE(testObj.SetStartCoordinates(testPoint1));
+  currRobotPointNew = testObj.GetRobotCoordinates();
+  ASSERT_EQ(currRobotPoint.x, currRobotPointNew.x);
   ASSERT_EQ(currRobotPoint.y, currRobotPointNew.y);
-    ASSERT_EQ(currRobotPoint.z, currRobotPointNew.z);
+  ASSERT_EQ(currRobotPoint.z, currRobotPointNew.z);
 }
 
 /**
@@ -101,9 +101,8 @@ TEST(SetStartCoordinates, testSetStartCoordinatesInvalid) {
  */
 
 TEST(InitializeMap, testInitializeMapValid) {
-    Map testObj = Map();
-    ASSERT_TRUE(testObj.InitializeMap(cv::Point(500, 500), 2.5, 3.5));
-  //ASSERT_TRUE(testObj.DisplayMapImage());
+  Map testObj = Map();
+  ASSERT_TRUE(testObj.InitializeMap(cv::Point(500, 500), 2.5, 3.5));
 }
 
 /**
@@ -115,9 +114,8 @@ TEST(InitializeMap, testInitializeMapValid) {
  */
 
 TEST(InitializeMap, testInitializeMapInvalid) {
-    Map testObj = Map();
-    ASSERT_FALSE(testObj.InitializeMap(cv::Point(-100, -100), 2.5 , 3.5));
-  //ASSERT_FALSE(testObj.DisplayMapImage());
+  Map testObj = Map();
+  ASSERT_FALSE(testObj.InitializeMap(cv::Point(-100, -100), 2.5, 3.5));
 }
 
 
@@ -147,23 +145,17 @@ TEST(SetDestinationCoordinates, testSetDestinationCoordinatesValid ) {
  */
 
 TEST(SetDestinationCoordinates, testSetDestinationCoordinatesInvalid) {
-    Map testObj = Map();
+  Map testObj = Map();
   testObj.InitializeMap(cv::Point(500, 500), 2.5, 3.5);
-    cv::Point3f currRobotPoint = testObj.GetRobotCoordinates();
-    cv::Point3f testPoint1;
-    testPoint1.x = -1;
-    testPoint1.y = -1;
-    testPoint1.z = 0;
-    ASSERT_FALSE(testObj.SetDestinationCoordinates(testPoint1));
-    cv::Point3f testPoint2;
-    testPoint2.x = 500;
-    testPoint2.y = 500;
-    testPoint2.z = 0;
-    ASSERT_FALSE(testObj.SetDestinationCoordinates(testPoint2));
+  cv::Point3f currRobotPoint = testObj.GetRobotCoordinates();
+  cv::Point3f testPoint1;
+  testPoint1.x = -1;
+  testPoint1.y = -1;
+  testPoint1.z = 0;
+  ASSERT_FALSE(testObj.SetDestinationCoordinates(testPoint1));
+  cv::Point3f testPoint2;
+  testPoint2.x = 500;
+  testPoint2.y = 500;
+  testPoint2.z = 0;
+  ASSERT_FALSE(testObj.SetDestinationCoordinates(testPoint2));
 }
-
-
-
-
-
-

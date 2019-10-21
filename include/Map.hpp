@@ -39,37 +39,37 @@
 #ifndef INCLUDE_MAP_HPP_
 #define INCLUDE_MAP_HPP_
 
-#include <string>
 #include <opencv2/opencv.hpp>
+#include <string>
 
 class Map {
  private:
-    cv::Point mapBounds;
-    cv::Mat currMapImage;
-    cv::Point3f startCoords;
-    cv::Point3f destinationCoords;
-    cv::Point3f currCoords;
+  cv::Point mapBounds;
+  cv::Mat currMapImage;
+  cv::Point3f startCoords;
+  cv::Point3f destinationCoords;
+  cv::Point3f currCoords;
   double width;
   double length;
 
  public:
-    bool SetStartCoordinates(cv::Point3f inputCoordinates);
+  bool SetStartCoordinates(cv::Point3f inputCoordinates);
 
-    bool SetDestinationCoordinates(cv::Point3f inputCoordinates);
+  bool SetDestinationCoordinates(cv::Point3f inputCoordinates);
 
-    bool UpdateRobotLocation(cv::Point3f coordinates);
+  bool UpdateRobotLocation(cv::Point3f coordinates);
 
-    cv::Point3f GetRobotCoordinates();
+  cv::Point3f GetRobotCoordinates();
 
   bool InitializeMap(cv::Point inMapBounds, double robotLength,
 
   double robotWidth);
 
-    bool CheckReachedDestination();
+  bool CheckReachedDestination();
 
-    bool CheckValidCoordinates(cv::Point3f inputCoordinates);
+  bool CheckValidCoordinates(cv::Point3f inputCoordinates);
 
-    bool DisplayMapImage();
+  bool DisplayMapImage();
 };
 
 

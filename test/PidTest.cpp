@@ -46,17 +46,15 @@
  *
  */
 TEST(SetKpTest, testSetKpValid) {
-	Pid testObj = Pid();
-	Eigen::Matrix<double, 2, 3> kp1;
-	kp1 << 1, 2, 3, 4, 5, 6;
-	bool b1 = testObj.setKp(kp1);
-	EXPECT_EQ(true, b1);
-	//ASSERT_THAT(testObj.getKp(), kp1);
-	Eigen::Matrix<double, 2, 3> kp2;
-	kp2 << -1, 2, -3, 4, 5, 6;
-	bool b2 = testObj.setKp(kp2);
-	EXPECT_EQ(false, b2);
-	//ASSERT_THAT(testObj.getKp(), kp2);
+  Pid testObj = Pid();
+  Eigen::Matrix<double, 2, 3> kp1;
+  kp1 << 1, 2, 3, 4, 5, 6;
+  bool b1 = testObj.setKp(kp1);
+  EXPECT_EQ(true, b1);
+  Eigen::Matrix<double, 2, 3> kp2;
+  kp2 << -1, 2, -3, 4, 5, 6;
+  bool b2 = testObj.setKp(kp2);
+  EXPECT_EQ(false, b2);
 }
 
 /**
@@ -65,17 +63,15 @@ TEST(SetKpTest, testSetKpValid) {
  *
  */
 TEST(SetKiTest, testSetKiValid) {
-	Pid testObj = Pid();
-	Eigen::Matrix<double, 2, 3> ki1;
-	ki1 << 1, 2, 3, 4, 5, 6;
-	bool b1 = testObj.setKi(ki1);
-	EXPECT_EQ(true, b1);
-	//ASSERT_THAT(testObj.getKi(), ki1);
-	Eigen::Matrix<double, 2, 3> ki2;
-	ki2 << -1, 2, -3, 4, 5, 6;
-	bool b2 = testObj.setKi(ki2);
-	EXPECT_EQ(false, b2);
-	//ASSERT_THAT(testObj.getKi(), ki2);
+  Pid testObj = Pid();
+  Eigen::Matrix<double, 2, 3> ki1;
+  ki1 << 1, 2, 3, 4, 5, 6;
+  bool b1 = testObj.setKi(ki1);
+  EXPECT_EQ(true, b1);
+  Eigen::Matrix<double, 2, 3> ki2;
+  ki2 << -1, 2, -3, 4, 5, 6;
+  bool b2 = testObj.setKi(ki2);
+  EXPECT_EQ(false, b2);
 }
 
 /**
@@ -84,17 +80,15 @@ TEST(SetKiTest, testSetKiValid) {
  *
  */
 TEST(SetKdTest, testSetKdValid) {
-	Pid testObj = Pid();
-	Eigen::Matrix<double, 2, 3> kd1;
-	kd1 << 1, 2, 3, 4, 5, 6;
-	bool b1 = testObj.setKd(kd1);
-	EXPECT_EQ(true, b1);
-	//ASSERT_THAT(testObj.getKi(), ki1);
-	Eigen::Matrix<double, 2, 3> kd2;
-	kd2 << -1, 2, -3, 4, 5, 6;
-	bool b2 = testObj.setKd(kd2);
-	EXPECT_EQ(false, b2);
-	//ASSERT_THAT(testObj.getKi(), ki2);
+  Pid testObj = Pid();
+  Eigen::Matrix<double, 2, 3> kd1;
+  kd1 << 1, 2, 3, 4, 5, 6;
+  bool b1 = testObj.setKd(kd1);
+  EXPECT_EQ(true, b1);
+  Eigen::Matrix<double, 2, 3> kd2;
+  kd2 << -1, 2, -3, 4, 5, 6;
+  bool b2 = testObj.setKd(kd2);
+  EXPECT_EQ(false, b2);
 }
 
 /**
@@ -103,27 +97,26 @@ TEST(SetKdTest, testSetKdValid) {
  *
  */
 TEST(GetControllerOutputTest, testGetControllerOutputValid) {
-	Pid testObj = Pid();
-	Eigen::Matrix<double, 2, 3> kp1;
-	kp1 << 1, 2, 3, 1, 1, 1;
-	bool b1 = testObj.setKp(kp1);
-	Eigen::Matrix<double, 2, 3> ki1;
-	ki1 << 1, 2, 3, 1, 1, 1;
-	bool b2 = testObj.setKi(ki1);
-	Eigen::Matrix<double, 2, 3> kd1;
-	kd1 << 1, 2, 3, 1, 1, 1;
-	bool b3 = testObj.setKd(kd1);
-	Eigen::Matrix<double, 2, 3> kp = testObj.getKp();
-	Eigen::Matrix<double, 2, 3> ki = testObj.getKi();
-	Eigen::Matrix<double, 2, 3> kd = testObj.getKd();
-	Eigen::Vector3d targetState;
-	targetState << 10, 10, 45;
-	Eigen::Vector3d actualState;
-	actualState << 5, 5, 30;
-	Eigen::Vector2d output = testObj.getControllerOutput(targetState,
-			actualState);
-	Eigen::Vector2d test(-180,-75);
-	EXPECT_EQ(output[0], test[0]);
-	EXPECT_EQ(output[1], test[1]);
+  Pid testObj = Pid();
+  Eigen::Matrix<double, 2, 3> kp1;
+  kp1 << 1, 2, 3, 1, 1, 1;
+  bool b1 = testObj.setKp(kp1);
+  Eigen::Matrix<double, 2, 3> ki1;
+  ki1 << 1, 2, 3, 1, 1, 1;
+  bool b2 = testObj.setKi(ki1);
+  Eigen::Matrix<double, 2, 3> kd1;
+  kd1 << 1, 2, 3, 1, 1, 1;
+  bool b3 = testObj.setKd(kd1);
+  Eigen::Matrix<double, 2, 3> kp = testObj.getKp();
+  Eigen::Matrix<double, 2, 3> ki = testObj.getKi();
+  Eigen::Matrix<double, 2, 3> kd = testObj.getKd();
+  Eigen::Vector3d targetState;
+  targetState << 10, 10, 45;
+  Eigen::Vector3d actualState;
+  actualState << 5, 5, 30;
+  Eigen::Vector2d output = testObj.getControllerOutput(targetState,
+                                                       actualState);
+  Eigen::Vector2d test(-180, -75);
+  EXPECT_EQ(output[0], test[0]);
+  EXPECT_EQ(output[1], test[1]);
 }
-

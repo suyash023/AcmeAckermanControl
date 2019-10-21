@@ -51,8 +51,8 @@
 #ifndef INCLUDE_PID_HPP_
 #define INCLUDE_PID_HPP_
 
-#include <iostream>
 #include <eigen3/Eigen/Core>
+#include <iostream>
 
 /**
  *
@@ -60,13 +60,13 @@
  *
  */
 class Pid {
-private:
-	Eigen::Matrix<double, 2, 3> kp;
-	Eigen::Matrix<double, 2, 3> ki;
-	Eigen::Matrix<double, 2, 3> kd;
-	Eigen::Vector3d lastError = Eigen::Vector3d::Zero();
-	Eigen::Vector3d errorSum = Eigen::Vector3d::Zero();
-public:
+ private:
+  Eigen::Matrix<double, 2, 3> kp;
+  Eigen::Matrix<double, 2, 3> ki;
+  Eigen::Matrix<double, 2, 3> kd;
+  Eigen::Vector3d lastError = Eigen::Vector3d::Zero();
+  Eigen::Vector3d errorSum = Eigen::Vector3d::Zero();
+ public:
 	/**
 	 *
 	 * @brief getter method for kp gains
@@ -76,7 +76,7 @@ public:
 	 * @return 2x3 matrix of kp gains
 	 *
 	 */
-	Eigen::Matrix<double, 2, 3> getKp();
+  Eigen::Matrix<double, 2, 3> getKp();
 
 	/**
 	 *
@@ -87,7 +87,7 @@ public:
 	 * @return 2x3 matrix of ki gains
 	 *
 	 */
-	Eigen::Matrix<double, 2, 3> getKi();
+  Eigen::Matrix<double, 2, 3> getKi();
 
 	/**
 	 *
@@ -98,7 +98,7 @@ public:
 	 * @return 2x3 matrix of kd gains
 	 *
 	 */
-	Eigen::Matrix<double, 2, 3> getKd();
+  Eigen::Matrix<double, 2, 3> getKd();
 
 	/**
 	 *
@@ -109,7 +109,7 @@ public:
 	 * @return bool
 	 *
 	 */
-	bool setKp(Eigen::Matrix<double, 2, 3> kpIn);
+  bool setKp(Eigen::Matrix<double, 2, 3> kpIn);
 	/**
 	 *
 	 * @brief setter method for ki gains
@@ -118,8 +118,8 @@ public:
 	 *
 	 * @return bool
 	 *
-	 */
-	bool setKi(Eigen::Matrix<double, 2, 3> kiIn);
+   */
+  bool setKi(Eigen::Matrix<double, 2, 3> kiIn);
 
 	/**
 	 *
@@ -130,7 +130,7 @@ public:
 	 * @return bool
 	 *
 	 */
-	bool setKd(Eigen::Matrix<double, 2, 3> kdIn);
+  bool setKd(Eigen::Matrix<double, 2, 3> kdIn);
 
 	/**
 	 *
@@ -143,8 +143,8 @@ public:
 	 * @return vector of velocity and steering angle
 	 *
 	 */
-	Eigen::Vector2d getControllerOutput(Eigen::Vector3d targetState,
-			Eigen::Vector3d currentState);
+  Eigen::Vector2d getControllerOutput(Eigen::Vector3d targetState,
+                                      Eigen::Vector3d currentState);
 
 	/**
 	 *
@@ -155,7 +155,7 @@ public:
 	 * @return none
 	 *
 	 */
-	void resetErrors();
+  void resetErrors();
 };
 
-#endif /* INCLUDE_PID_HPP_ */
+#endif  // INCLUDE_PID_HPP_
