@@ -12,6 +12,39 @@ cppcheck --enable=all --std=c++11 -I include/ --suppress=missingIncludeSystem $(
 Output:
 
 
+Checking app/AckermanKinematicModel.cpp...
+[include/AckermanKinematicModel.hpp:64]: (style) The class 'AckermanKinematicModel' does not have a constructor.
+1/11 files checked 8% done
+Checking app/Map.cpp...
+[app/Map.cpp:121]: (style) Variable 'b' is assigned a value that is never used.
+[include/Map.hpp:46]: (style) The class 'Map' does not have a constructor.
+2/11 files checked 26% done
+Checking app/Pid.cpp...
+3/11 files checked 32% done
+Checking app/main.cpp...
+4/11 files checked 49% done
+Checking include/AckermanKinematicModel.hpp...
+5/11 files checked 56% done
+Checking include/Map.hpp...
+6/11 files checked 61% done
+Checking include/Pid.hpp...
+7/11 files checked 68% done
+Checking test/AckermanModelTest.cpp...
+8/11 files checked 78% done
+Checking test/MapTest.cpp...
+9/11 files checked 88% done
+Checking test/PidTest.cpp...
+10/11 files checked 96% done
+Checking test/main.cpp...
+11/11 files checked 100% done
+[app/Pid.cpp:58]: (style) The function 'end' is never used.
+[app/AckermanKinematicModel.cpp:60]: (style) The function 'getAxleWidth' is never used.
+[app/AckermanKinematicModel.cpp:68]: (style) The function 'getCarVelocity' is never used.
+[app/AckermanKinematicModel.cpp:64]: (style) The function 'getSteeringAngle' is never used.
+[app/AckermanKinematicModel.cpp:56]: (style) The function 'getWheelBase' is never used.
+[app/Pid.cpp:121]: (style) The function 'resetErrors' is never used.
+
+
 
 
 
