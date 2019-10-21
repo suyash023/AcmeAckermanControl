@@ -44,7 +44,9 @@
 #include <iostream>
 #include <sstream>
 #include <fstream>
+#include <algorithm>
 #include <boost/tokenizer.hpp>
+#include <boost/algorithm/string.hpp>
 #include "Pid.hpp"
 #include "Map.hpp"
 #include "AckermanKinematicModel.hpp"
@@ -139,8 +141,7 @@ int main(int argc, char *argv[]) {
     destination.x = std::atof((*iter2).c_str());
     iter2++;
     destination.y = std::atof((*iter2).c_str());
-    iter2++;
-    destination.z = std::atof((*iter2).c_str());
+    destination.z = 0;
     checkValid = mapObj.SetDestinationCoordinates(destination);
     if ( !checkValid ||  length*10 > 0.2*bounds.x || width*10 > 0.2*bounds.y ) {
         std::cout << "Incorrect destination coordinates." << std::endl;
@@ -148,14 +149,18 @@ int main(int argc, char *argv[]) {
     }
 
     std::getline(inputFile, input);
+    std::vector<std::string> tokens;
     std::cout << "Kp matrix read was: " << input << std::endl;
-    boost::tokenizer<boost::char_delimiters_separator<char> > tok3(input, sep);
+    boost::split(tokens, input, boost::is_any_of(" "));
     std::vector<double> tempVec;
-    for ( auto str : tok3 ) {
+    for ( auto str : tokens ) {
         tempVec.push_back(std::atof(str.c_str()));
+        std::cout << str << std::endl;
     }
-    tempVec.clear();
-    Eigen::Matrix<double, 2, 3> kp(tempVec.data());
+    Eigen::Matrix<double, 2, 3> kp;
+    kp = Eigen::Map<Eigen::Matrix<double, 2, 3,
+            Eigen::RowMajor > >(tempVec.data(), 2, 3);
+    std::cout << "Kp matrix read was: " << kp << std::endl;
     checkValid = pidObj.setKp(kp);
     if ( !checkValid ) {
         std::cout << "Incorrect kp values" << std::endl;
@@ -163,12 +168,17 @@ int main(int argc, char *argv[]) {
     }
 
     std::getline(inputFile, input);
+    std::vector<std::string> tokens1;
     std::cout << "Ki matrix read was: " << input << std::endl;
-    boost::tokenizer<boost::char_delimiters_separator<char> > tok4(input, sep);
-    for ( auto str : tok4 ) {
-        tempVec.push_back(std::atof(str.c_str()));
+    boost::split(tokens1, input, boost::is_any_of(" "));
+    std::vector<double> tempVec2;
+    for ( auto str : tokens1 ) {
+        tempVec2.push_back(std::atof(str.c_str()));
+        std::cout << str << std::endl;
     }
-    Eigen::Matrix<double, 2, 3> ki(tempVec.data());
+    Eigen::Matrix<double, 2, 3> ki;
+    ki = Eigen::Map<Eigen::Matrix<double, 2, 3,
+                Eigen::RowMajor > >(tempVec2.data(), 2, 3);
     checkValid = pidObj.setKi(ki);
     if ( !checkValid ) {
         std::cout << "Incorrect ki values" << std::endl;
@@ -176,12 +186,18 @@ int main(int argc, char *argv[]) {
     }
 
     std::getline(inputFile, input);
+    std::vector<std::string> tokens3;
     std::cout << "Kd matrix read was: " << input << std::endl;
-    boost::tokenizer<boost::char_delimiters_separator<char> > tok5(input, sep);
-    for ( auto str : tok5 ) {
-        tempVec.push_back(std::atof(str.c_str()));
+    boost::split(tokens3, input, boost::is_any_of(" "));
+    std::vector<double> tempVec3;
+    for ( auto str : tokens3 ) {
+        tempVec3.push_back(std::atof(str.c_str()));
+        std::cout << str << std::endl;
     }
-    Eigen::Matrix<double, 2, 3> kd(tempVec.data());
+    tempVec3.clear();
+    Eigen::Matrix<double, 2, 3> kd;
+    kd = Eigen::Map<Eigen::Matrix<double, 2, 3,
+                    Eigen::RowMajor > >(tempVec3.data(), 2, 3);
     checkValid = pidObj.setKd(kd);
     if ( !checkValid ) {
         std::cout << "Incorrect kd values" << std::endl;
@@ -189,31 +205,39 @@ int main(int argc, char *argv[]) {
     }
 
     std::cout << "Starting PID loop... " << std::endl;
-    Eigen::Vector3d destinationCoord;
-    destinationCoord << destination.x, destination.y, destination.z;
+    Eigen::Vector3d dest;
+    dest << destination.x, destination.y, destination.z;
     while (1) {
         if (mapObj.CheckReachedDestination()) {
             break;
         }
         cv::Point3f currPos = mapObj.GetRobotCoordinates();
-        Eigen::Vector3d currCoord, destinationCoord;
+        Eigen::Vector3d currCoord;
         Eigen::Vector2d out;
+        std::cout << "Destination coordinates "
+                "are: " << dest.transpose() << std::endl;
         currCoord << currPos.x, currPos.y, currPos.z;
-        out = pidObj.getControllerOutput(currCoord, destinationCoord);
-        std::cout << "Command velocity is: " << out << std::endl;
+        out = pidObj.getControllerOutput(currCoord, dest);
+        std::cout << "Command velocity is (robot velocity, "
+                "steering angle velocity): " << out.transpose() << std::endl;
+
         checkValid = akmObj.setCarVelocityAndSteeringAngle(out);
         if ( !checkValid ) {
-            std::cout << "Cannot move to the point!" << std::endl;
+            std::cout << "Cannot move to the point! "
+                    "Try changing the gains or try changing the "
+                    "initial angle" << std::endl;
             break;
         }
         cv::Point3f setState;
         setState = akmObj.calcAckermanParameters();
         checkValid = mapObj.UpdateRobotLocation(setState);
+        std::cout << "Car state is (x pos, y pos, angle): "
+                "" << setState << std::endl;
         if (!checkValid) {
             std::cout << "Robot tried to move to an invalid state" << std::endl;
             break;
         }
-        mapObj.DisplayMapImage();
+        //mapObj.DisplayMapImage();
     }
 
     return 0;
