@@ -50,6 +50,7 @@
 
 #include "AckermanKinematicModel.hpp"
 #include <vector>
+#include <math.h>
 
 
 double AckermanKinematicModel::getWheelBase() {
@@ -105,7 +106,7 @@ bool AckermanKinematicModel::setCarVelocityAndSteeringAngle(
   if (checkSteeringAngle==true) {
 	setSteeringAngle = true;
   }
-  return checkSteeringAngle;
+  return setSteeringAngle;
 }
 
 bool AckermanKinematicModel::setCarState(cv::Point3f state) {
@@ -118,17 +119,17 @@ bool AckermanKinematicModel::setCarState(cv::Point3f state) {
 	return checkCarState;
 }
 cv::Point3f AckermanKinematicModel::calcAckermanParameters() {
-	double deltaTheta =  (carVelocity/wheelBase) * std::tan(steeringAngle);
-	double deltaX = carVelocity * std::cos(carState.z + (deltaTheta*dt));
-	double deltaY = carVelocity * std::sin(carState.z + (deltaTheta*dt));
-    carState.x = carState.x + deltaX;
+	double deltaTheta =  (carVelocity/wheelBase) * std::tan(steeringAngle * M_PI/180);
+	double deltaX = carVelocity * std::cos((carState.z + (deltaTheta*dt))*M_PI/180) * dt;
+	double deltaY = carVelocity * std::sin((carState.z + (deltaTheta*dt))*M_PI/180) * dt;
+	carState.x = carState.x + deltaX;
     carState.y = carState.y + deltaY;
     carState.z = carState.z + deltaTheta*dt;
     return carState;
 }
 bool AckermanKinematicModel::checkAngleConstraints() {
-  double innerSteerAngle = std::atan((2 * wheelBase * std::sin(steeringAngle)) / (2*wheelBase*std::cos(steeringAngle) - axleWidth*std::sin(steeringAngle)));
-  double outerSteerAngle = std::atan((2 * wheelBase * std::sin(steeringAngle)) / (2*wheelBase*std::cos(steeringAngle) + axleWidth*std::sin(steeringAngle)));
+  double innerSteerAngle = 180/M_PI * std::atan((2 * wheelBase * std::sin(steeringAngle * M_PI/180)) / (2*wheelBase*std::cos(steeringAngle * M_PI/180) - axleWidth*std::sin(steeringAngle * M_PI/180))) ;
+  double outerSteerAngle = 180/M_PI * std::atan((2 * wheelBase * std::sin(steeringAngle * M_PI/180)) / (2*wheelBase*std::cos(steeringAngle * M_PI/180) + axleWidth*std::sin(steeringAngle * M_PI/180))) ;
   bool checkAngle = false;
   if ((innerSteerAngle <= 45) && (outerSteerAngle <= 45)) {
 	  checkAngle = true;
