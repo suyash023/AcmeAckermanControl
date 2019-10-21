@@ -23,6 +23,8 @@ matrix:
 before_install:
   - pip install --user cpp-coveralls
 install:
+  #install boost
+  - sudo apt-get install libboost-all-dev
   - sudo apt-get install -y -qq lcov
   #install eigent
   - sudo apt-get install libeigen3-dev
