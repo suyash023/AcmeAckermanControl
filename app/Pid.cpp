@@ -107,11 +107,14 @@ Eigen::Vector2d Pid::getControllerOutput(
     Eigen::Vector3d error;
     Eigen::Vector3d errorDiff;
     Eigen::Vector2d controlOut;
-    error = targetState - currentState;
+    error = currentState - targetState;
+    std::cout << "The error is: (x,y) " <<
+    error.transpose().head(2) << std::endl;
     errorDiff = error - lastError;
     errorSum = errorSum + error;
     controlOut = kp*error + ki*errorSum + kd*errorDiff;
     lastError = error;
+
     return controlOut;
 }
 
