@@ -67,7 +67,7 @@ class AckermanKinematicModel {
   double steeringAngle;
   double carVelocity;
   cv::Point3f carState;
-  double dt = 0.001;
+  double dt = 0.01;
 
  public:
   /**
