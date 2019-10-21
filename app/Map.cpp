@@ -41,7 +41,7 @@
  * @brief function to set start coordinates based on user input
  * @param inputCoordinates Coordinates specified by user
  * @return bool true or false depending on if the value was set or not
- **/
+ */
 bool Map::SetStartCoordinates(cv::Point3f inputCoordinates) {
   bool b = UpdateRobotLocation(inputCoordinates);
   return b;
@@ -69,6 +69,7 @@ bool Map::SetDestinationCoordinates(cv::Point3f inputCoordinates) {
  * to set robot location
  * @param coordinates Coordinates output from ackermann model that
  * need to be set so that it is reflected in the map
+ * @return bool true or false
  */
 bool Map::UpdateRobotLocation(cv::Point3f coordinates) {
   bool val = CheckValidCoordinates(coordinates);
@@ -77,9 +78,9 @@ bool Map::UpdateRobotLocation(cv::Point3f coordinates) {
 
     cv::circle(currMapImage, cv::Point(currCoords.x, currCoords.y),
                30.0, cv::Scalar(0, 0, 255), 1, 8, 0);
-    cv::circle(currMapImage, cv::Point(destinationCoords.x, destinationCoords.y),
+    cv::circle(currMapImage,
+               cv::Point(destinationCoords.x, destinationCoords.y),
                    10.0, cv::Scalar(255, 0, 0), -1, 8, 0);
-
     cv::Point2f center(coordinates.x, coordinates.y);
     cv::Size2f robotSize(length, width);
     float angle = coordinates.z;
@@ -133,6 +134,7 @@ bool Map::UpdateRobotLocation(cv::Point3f coordinates) {
  * @brief function to get the current robot coordinates in map.
  * Used in feed back for PID controller module to get
  * current robot location in the map.
+ * @param none
  * @return the current position (x,y) and heading angle
  */
 cv::Point3f Map::GetRobotCoordinates() {
@@ -146,7 +148,7 @@ cv::Point3f Map::GetRobotCoordinates() {
  * Map will be initialized based on bounds.
  * Function returns the map image.
  * @param none
- * @return Mat initialized map image with robot at one corner.
+ * @return bool true or false depending on conditions.
  */
 bool Map::InitializeMap(cv::Point inMapBounds, double robotLength,
                         double robotWidth) {
@@ -175,8 +177,11 @@ bool Map::InitializeMap(cv::Point inMapBounds, double robotLength,
  * @return true or false depending on if robot has reached location
  */
 bool Map::CheckReachedDestination() {
-  if (abs(currCoords.x - destinationCoords.x) < 7 && abs(currCoords.y - destinationCoords.y) < 7) {
-    std::cout << "Robot reached within 7 pixels distance of destination. Exiting!" << std::endl;
+  if (abs(currCoords.x - destinationCoords.x) < 7
+      && abs(currCoords.y - destinationCoords.y) < 7) {
+    std::cout << "Robot reached within 7 pixels distance of destination. "
+              "Exiting!"
+              << std::endl;
       return true;
   } else {
       return false;
@@ -223,7 +228,6 @@ bool Map::CheckValidCoordinates(cv::Point3f inputCoordinates) {
     }
   }
   return true;
-
 }
 
 /**

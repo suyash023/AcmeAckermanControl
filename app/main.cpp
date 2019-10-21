@@ -34,7 +34,7 @@
  *
  * @date 2019-10-19
  *
- * @author Ishan Patel, Nakul Patel, Suyash Yeotikar
+ * @author Suyash Yeotikar(driver), Ishan Patel, Nakul Patel
  *
  * @brief main program for Acme Robotics' Ackermann Controller.
  *
@@ -62,7 +62,7 @@ int main(int argc, char *argv[]) {
     AckermanKinematicModel akmObj;
     bool checkValid;
     if ( argc != 2 ) {
-        std::cout << "Entered incorrect command line parameters! "
+    std::cout << "Entered incorrect command line parameters! "
               "argument is file name" << std::endl;
         return 0;
     }
@@ -237,9 +237,7 @@ int main(int argc, char *argv[]) {
             std::cout << "Robot tried to move to an invalid state" << std::endl;
             break;
         }
-        //mapObj.DisplayMapImage();
     }
-
     return 0;
 }
 

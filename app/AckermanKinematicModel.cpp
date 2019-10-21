@@ -49,8 +49,8 @@
 
 
 #include "AckermanKinematicModel.hpp"
-#include <vector>
 #include <math.h>
+#include <vector>
 
 
 double AckermanKinematicModel::getWheelBase() {
@@ -71,14 +71,13 @@ double AckermanKinematicModel::getCarVelocity() {
 
 cv::Point3f AckermanKinematicModel::getCarState() {
   return carState;
-
 }
 
 bool AckermanKinematicModel::setWheelBase(double l) {
   bool checkWheelBase = false;
   if (l >= 0) {
-	wheelBase = l;
-	checkWheelBase = true;
+    wheelBase = l;
+    checkWheelBase = true;
   }
   return checkWheelBase;
 }
@@ -86,53 +85,66 @@ bool AckermanKinematicModel::setWheelBase(double l) {
 bool AckermanKinematicModel::setAxleWidth(double w) {
   bool checkAxleWidth = false;
   if (w >= 0) {
-	axleWidth = w;
-	checkAxleWidth = true;
+    axleWidth = w;
+    checkAxleWidth = true;
   }
   return checkAxleWidth;
 }
 
 bool AckermanKinematicModel::setCarVelocityAndSteeringAngle(
-		Eigen::Vector2d controllerOutput) {
+    Eigen::Vector2d controllerOutput) {
   if (controllerOutput(0) > 1000) {
-	carVelocity = 1000;
-  }
-  else {
-	carVelocity = controllerOutput(0);
+    carVelocity = 1000;
+  } else {
+    carVelocity = controllerOutput(0);
   }
   steeringAngle = controllerOutput(1);
   bool checkSteeringAngle = checkAngleConstraints();
   bool setSteeringAngle = false;
-  if (checkSteeringAngle==true) {
-	setSteeringAngle = true;
+  if (checkSteeringAngle == true) {
+    setSteeringAngle = true;
   }
   return setSteeringAngle;
 }
 
 bool AckermanKinematicModel::setCarState(cv::Point3f state) {
-	carState = state;
-	cv::Point3f checkState = AckermanKinematicModel::getCarState();
-	bool checkCarState = false;
-	if ((checkState.x==state.x) && (checkState.y==state.y) && (checkState.z==state.z)) {
-		checkCarState = true;
-	}
-	return checkCarState;
+  carState = state;
+  cv::Point3f checkState = AckermanKinematicModel::getCarState();
+  bool checkCarState = false;
+  if ((checkState.x == state.x) && (checkState.y == state.y)
+      && (checkState.z == state.z)) {
+    checkCarState = true;
+  }
+  return checkCarState;
 }
+
 cv::Point3f AckermanKinematicModel::calcAckermanParameters() {
-	double deltaTheta =  (carVelocity/wheelBase) * std::tan(steeringAngle * M_PI/180);
-	double deltaX = carVelocity * std::cos((carState.z + (deltaTheta*dt))*M_PI/180) * dt;
-	double deltaY = carVelocity * std::sin((carState.z + (deltaTheta*dt))*M_PI/180) * dt;
-	carState.x = carState.x + deltaX;
-    carState.y = carState.y + deltaY;
-    carState.z = carState.z + deltaTheta*dt;
-    return carState;
+  double deltaTheta = (carVelocity / wheelBase)
+      * std::tan(steeringAngle * M_PI / 180);
+  double deltaX = carVelocity
+      * std::cos((carState.z + (deltaTheta * dt)) * M_PI / 180) * dt;
+  double deltaY = carVelocity
+      * std::sin((carState.z + (deltaTheta * dt)) * M_PI / 180) * dt;
+  carState.x = carState.x + deltaX;
+  carState.y = carState.y + deltaY;
+  carState.z = carState.z + deltaTheta * dt;
+  return carState;
 }
+
 bool AckermanKinematicModel::checkAngleConstraints() {
-  double innerSteerAngle = 180/M_PI * std::atan((2 * wheelBase * std::sin(steeringAngle * M_PI/180)) / (2*wheelBase*std::cos(steeringAngle * M_PI/180) - axleWidth*std::sin(steeringAngle * M_PI/180))) ;
-  double outerSteerAngle = 180/M_PI * std::atan((2 * wheelBase * std::sin(steeringAngle * M_PI/180)) / (2*wheelBase*std::cos(steeringAngle * M_PI/180) + axleWidth*std::sin(steeringAngle * M_PI/180))) ;
+  double innerSteerAngle = 180 / M_PI
+      * std::atan(
+          (2 * wheelBase * std::sin(steeringAngle * M_PI / 180))
+              / (2 * wheelBase * std::cos(steeringAngle * M_PI / 180)
+                  - axleWidth * std::sin(steeringAngle * M_PI / 180)));
+  double outerSteerAngle = 180 / M_PI
+      * std::atan(
+          (2 * wheelBase * std::sin(steeringAngle * M_PI / 180))
+              / (2 * wheelBase * std::cos(steeringAngle * M_PI / 180)
+                  + axleWidth * std::sin(steeringAngle * M_PI / 180)));
   bool checkAngle = false;
   if ((innerSteerAngle <= 45) && (outerSteerAngle <= 45)) {
-	  checkAngle = true;
+    checkAngle = true;
   }
   return checkAngle;
 }

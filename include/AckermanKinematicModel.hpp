@@ -47,13 +47,14 @@
  *
  */
 
-#ifndef _INCLUDE_ACKERMANKINEMATICMODEL_HPP_
-#define _INCLUDE_ACKERMANKINEMATICMODEL_HPP_
+#ifndef INCLUDE_ACKERMANKINEMATICMODEL_HPP_
+#define INCLUDE_ACKERMANKINEMATICMODEL_HPP_
 
+#include <eigen3/Eigen/Core>
 #include <iostream>
 #include <vector>
-#include <eigen3/Eigen/Core>
 #include <opencv2/opencv.hpp>
+
 
 /**
  *
@@ -171,4 +172,4 @@ class AckermanKinematicModel {
   bool checkAngleConstraints();
 };
 
-#endif   // _INCLUDE_ACKERMANKINEMATICMODEL_HPP_
+#endif   // INCLUDE_ACKERMANKINEMATICMODEL_HPP_

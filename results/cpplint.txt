@@ -1,0 +1,18 @@
+
+
+On running the cpplint command as follows:  
+
+
+Command:
+
+cpplint $( find . -name \*.hpp -or -name \*.cpp | grep -vE -e "^./build/" -e "^./vendor/" -e "^./docs/" -e "^./results" )
+
+
+
+
+Output:
+
+
+
+
+
