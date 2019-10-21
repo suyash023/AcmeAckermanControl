@@ -66,6 +66,7 @@ class Pid {
   Eigen::Matrix<double, 2, 3> kd;
   Eigen::Vector3d lastError = Eigen::Vector3d::Zero();
   Eigen::Vector3d errorSum = Eigen::Vector3d::Zero();
+
  public:
 	/**
 	 *

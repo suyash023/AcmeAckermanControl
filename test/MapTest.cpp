@@ -39,6 +39,7 @@
 #include <opencv2/opencv.hpp>
 #include "Map.hpp"
 
+
 /**
  * @brief Test if Start Coordinates and get coordinates functions works properly
  * Set valid coordinates that are within the map

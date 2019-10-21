@@ -82,7 +82,6 @@ TEST(SetCarVelocitySteeringAngleTest, testSetCarVelocitySteeringAngleValid) {
   Eigen::Vector2d velocityAngle2(30.0, 45.0);
   bool b2 = testObj.setCarVelocityAndSteeringAngle(velocityAngle2);
   EXPECT_NE(true, b2);
-
 }
 
 /**

@@ -39,8 +39,9 @@
 #ifndef INCLUDE_MAP_HPP_
 #define INCLUDE_MAP_HPP_
 
-#include <opencv2/opencv.hpp>
 #include <string>
+#include <opencv2/opencv.hpp>
+
 
 class Map {
  private:

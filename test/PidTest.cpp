@@ -35,10 +35,10 @@
  * @brief Provides testing cases for the Pid Class.
  */
 
+#include <eigen3/Eigen/Core>
 #include <gtest/gtest.h>
 #include <opencv2/opencv.hpp>
 #include "Pid.hpp"
-#include <eigen3/Eigen/Core>
 
 /**
  * @brief Runs and tests getter and setter of Proportional Gain

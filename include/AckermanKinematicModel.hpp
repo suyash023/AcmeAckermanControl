@@ -51,9 +51,10 @@
 #define INCLUDE_ACKERMANKINEMATICMODEL_HPP_
 
 #include <eigen3/Eigen/Core>
-#include <opencv2/opencv.hpp>
 #include <iostream>
 #include <vector>
+#include <opencv2/opencv.hpp>
+
 
 /**
  *
