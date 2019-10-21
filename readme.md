@@ -6,7 +6,29 @@
 
 ## Project Overview and Description:
 
-This repository contains the implementation of the Ackermann Module, with the visualization, and three modules: Map, AckermanKinematicModel and Pid. The map module consists of a 2D visualisation in which the map and robot are represented as images, with robot as a smaller image. The user provides target position and heading angle. The PID controller takes current and target state(x, y, theta) from the Map class and gives steering angle and car(robot) velocity as output. The AckermanKinemticModel takes the car velocity and steering angle as input from the PID class, and updates the state by calculating the variation in them and adding it to each state, which in turn is given as input to Map class, to update the robot image. 
+This repository contains the implementation of the Ackermann Module, with the visualization, and three modules: Map, AckermanKinematicModel and Pid.  The user provides start and target coordinates. Visualization is created demonstrating convergence to the set point.   
+
+The controller for Ackermann kinematic model consists of three submodules : 
+
+#### 1) Map module
+ The map module consists of a 2D visualisation in which the map and robot are represented as images, with robot as a smaller image. It has following features:
+- Sets start and destination coordinates based on user inputs and their validity.
+- Provides current coordinates of the robot to Pid controller class module.
+- Initializes the map for visualization of movement of robot.
+- Updates the location of the robot based on the input from AckermanKinematicModel class module.
+
+#### 2) Pid controller module
+The PID controller takes current and target state(x, y, theta) from the Map class and gives steering angle and car(robot) velocity as output.It's featurs are as follows:
+- Stores Kp,Ki and Kd gain values. 
+- Stores sum of errors as well as last error.
+- Computes control signal (Robot velocity, steering angle) based on error calculated using current coordinates and destination coordinates of the robot.
+
+#### 3) AckermanKinematicModel module
+The AckermanKinemticModel takes the car velocity and steering angle as input from the PID class, and updates the state by calculating the variation in them and adding it to each state, which in turn is given as input to Map class, to update the robot image. It has following features:
+- Stores the values of robot's wheelbase and axlewidth and checks their validity.
+- Checks the validity of robot velocity and steering angle received as an input from Pid controller class module.
+- Checks angle constraints on inner and outer wheel angles.
+- Updates the car's current coordinates based on the robot velocity and steering angle received as an input from Pid controller class module.
 
 ## Group Members
 
@@ -14,6 +36,9 @@ Ishan Patel
 Nakul Patel
 Suyash Yeotikar
 
+## Dependencies
+The visualization requires the use of:
+- OpenCV
 
 ## Standard install via command-line:
 ```
@@ -50,10 +75,37 @@ AckermanKinematicModel: Nakul(Driver), Ishan(Navigator) and Suyash(Design Keeper
 
 Pid: Ishan(Driver), Suyash(Navigator) and Nakul(Design Keeper)
 
+## Iteration 2:
+Unit tests for each module, Implementation of all the modules, Fixed the bugs/methods to pass Unit tests, Run cpplint and cppcheck and fixed errors, Generated doxygen documentation, Update readme with proper details and descriptions   
 
-## Doxygen Documentation:
+Map: Nakul(Driver), Ishan(Navigator) and Suyash(Design Keeper)
 
-Will be updated at the end of iteration2
+AckermanKinematicModel: Ishan(Driver), Suyash(Navigator) and Nakul(Design Keeper)
+
+
+Pid: Suyash(Driver), Nakul(Navigator) and Ishan(Design Keeper)
+
+## Generating Doxygen Documentation:
+```
+sudo apt-get install flex
+git clone https://github.com/doxygen/doxygen.git
+cd doxygen
+mkdir build
+cd build
+cmake -G "Unix Makefiles" ..
+make
+sudo make install
+```
+After installation run following command to generate the doxygen configuration file.
+```
+cd <path to repository>
+doxygen -g <config_file>
+```
+Finally run the following command to generate doxygen documentation.
+```
+doxygen <config_file>
+```
+
 
 
 ## Building for code coverage:
@@ -78,8 +130,8 @@ In your work directory, use cmake to create an Eclipse project for an [out-of-so
 
 ```
 cd ~/workspace
-mkdir -p boilerplate-eclipse
-cd boilerplate-eclipse
+mkdir -p Acme-eclipse
+cd Acme-eclipse
 cmake -G "Eclipse CDT4 - Unix Makefiles" -D CMAKE_BUILD_TYPE=Debug -D CMAKE_ECLIPSE_VERSION=4.7.0 -D CMAKE_CXX_COMPILER_ARG1=-std=c++14 ../AcmeAckermanControl/
 ```
 
