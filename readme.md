@@ -98,25 +98,19 @@ AckermanKinematicModel: Ishan(Driver), Suyash(Navigator) and Nakul(Design Keeper
 
 Pid: Suyash(Driver), Nakul(Navigator) and Ishan(Design Keeper)
 
-## Generating Doxygen Documentation:
+
+## Doxygen Documentation
+
+Although the repository contains the documentation, if you'd still like to generate it then follow the instructions below.
+
+Install doxygen using below commands
 ```
-sudo apt-get install flex
-git clone https://github.com/doxygen/doxygen.git
-cd doxygen
-mkdir build
-cd build
-cmake -G "Unix Makefiles" ..
-make
-sudo make install
+sudo apt-get install doxygen
+sudo apt-get install doxygen-gui
 ```
-After installation run following command to generate the doxygen configuration file.
+After installation run following command to open the doxywizard wherein you can fill in the details as required and set the source code folder to the repository as well. Create a new folder in the repository and select that as the destination directory. Add paths to include and src folders and then proceed with the default settings and generate the documentation.
 ```
-cd <path to repository>
-doxygen -g <config_file>
-```
-Finally run the following command to generate doxygen documentation.
-```
-doxygen <config_file>
+doxywizard
 ```
 
 
