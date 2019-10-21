@@ -72,12 +72,14 @@ TEST(SetAxleWidthTest, testAxleWidthValid) {
  */
 TEST(SetCarVelocitySteeringAngleTest, testSetCarVelocitySteeringAngleValid) {
   AckermanKinematicModel testObj = AckermanKinematicModel();
-  Eigen::Vector2d velocityAngle1(25.0, 40.0);
+  Eigen::Vector2d velocityAngle1(25.0, 30.0);
+  bool a1 = testObj.setWheelBase(2.0);
+  bool a2 = testObj.setAxleWidth(1.0);
   bool b1 = testObj.setCarVelocityAndSteeringAngle(velocityAngle1);
   EXPECT_EQ(true, b1);
   // EXPECT_GT(0, carVel);
   // EXPECT_LT(steerAngle, 45);
-  Eigen::Vector2d velocityAngle2(30.0, -15.0);
+  Eigen::Vector2d velocityAngle2(30.0, 45.0);
   bool b2 = testObj.setCarVelocityAndSteeringAngle(velocityAngle2);
   EXPECT_NE(true, b2);
 
@@ -113,7 +115,7 @@ TEST(CalcAckermanParameterTest, testCalcAckermanParameter) {
   AckermanKinematicModel testObj = AckermanKinematicModel();
   bool b1 = testObj.setWheelBase(2.0);
   EXPECT_EQ(true, b1);
-  Eigen::Vector2d vec(50.0, 10.0);
+  Eigen::Vector2d vec(50.0, 40.0);
   bool b2 = testObj.setCarVelocityAndSteeringAngle(vec);
   EXPECT_EQ(true, b2);
   cv::Point3f initialState;
@@ -123,9 +125,9 @@ TEST(CalcAckermanParameterTest, testCalcAckermanParameter) {
   bool b3 = testObj.setCarState(initialState);
   EXPECT_EQ(true, b3);
   cv::Point3f updatedState = testObj.calcAckermanParameters();
-  EXPECT_NEAR(0.81052, updatedState.x, 0.05);
-  EXPECT_NEAR(0.81041, updatedState.y, 0.05);
-  EXPECT_NEAR(0.016209, updatedState.z, 0.05);
+  EXPECT_NEAR(0.5, updatedState.x, 0.05);
+  EXPECT_NEAR(0.001831, updatedState.y, 0.05);
+  EXPECT_NEAR(0.209774, updatedState.z, 0.05);
 }
 
 /**
@@ -139,7 +141,7 @@ TEST(CheckAngleConstraintTest, testCheckAngleConstraint) {
   AckermanKinematicModel testObj = AckermanKinematicModel();
   bool b1 = testObj.setWheelBase(2.0);
   bool b2 = testObj.setAxleWidth(1.0);
-  Eigen::Vector2d vec(60.0, 45.0);
+  Eigen::Vector2d vec(25.0, 30.0);
   bool b3 = testObj.setCarVelocityAndSteeringAngle(vec);
   bool b = testObj.checkAngleConstraints();
   EXPECT_EQ(true, b);
