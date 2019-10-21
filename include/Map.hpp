@@ -29,21 +29,49 @@
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * @file main.cpp
- *
- * @author Nakul Patel, Ishan Patel, Suyash Yeotikar
- *
- * @brief unit tests for Acme's Controller software
- *
- * @version 1
- *
- * @date 2019-10-21
- *
- */
+ * @file Map.hpp
+ * @date 12th October 2019
+ * @author Suyash Yeotikar (driver), Nakul Patel (Navigator), Ishan Patel (Design Keeper)
+ * @brief Map module header containing function definitions and variables.
+ * @mainpage
+ **/
 
-#include <gtest/gtest.h>
+#ifndef ACME_ACKERMAN_CONTROL_INCLUDE_MAP_HPP_
+#define ACME_ACKERMAN_CONTROL_INCLUDE_MAP_HPP_
 
-int main(int argc, char** argv) {
-  ::testing::InitGoogleTest(&argc, argv);
-  return RUN_ALL_TESTS();
-}
+#include <string>
+#include <opencv2/opencv.hpp>
+
+
+class Map {
+ private:
+  cv::Point mapBounds;
+  cv::Mat currMapImage;
+  cv::Point3f startCoords;
+  cv::Point3f destinationCoords;
+  cv::Point3f currCoords;
+  double width;
+  double length;
+
+ public:
+  bool SetStartCoordinates(cv::Point3f inputCoordinates);
+
+  bool SetDestinationCoordinates(cv::Point3f inputCoordinates);
+
+  bool UpdateRobotLocation(cv::Point3f coordinates);
+
+  cv::Point3f GetRobotCoordinates();
+
+  bool InitializeMap(cv::Point inMapBounds, double robotLength,
+
+  double robotWidth);
+
+  bool CheckReachedDestination();
+
+  bool CheckValidCoordinates(cv::Point3f inputCoordinates);
+
+  bool DisplayMapImage();
+};
+
+
+#endif  // ACME_ACKERMAN_CONTROL_INCLUDE_MAP_HPP_

@@ -1,0 +1,36 @@
+
+
+On running the cpplint command as follows:  
+
+
+Command:
+
+cpplint $( find . -name \*.hpp -or -name \*.cpp | grep -vE -e "^./build/" -e "^./vendor/" -e "^./docs/" -e "^./results" )
+
+
+
+
+Output:
+
+
+Done processing ./test/main.cpp
+Done processing ./test/MapTest.cpp
+Done processing ./test/PidTest.cpp
+Done processing ./test/AckermanModelTest.cpp
+Done processing ./app/main.cpp
+Done processing ./app/Pid.cpp
+Done processing ./app/AckermanKinematicModel.cpp
+Done processing ./app/Map.cpp
+./include/Map.hpp:39:  #ifndef header guard has wrong style, please use: DESKTOP_ACMEACKERMANCONTROL_INCLUDE_MAP_HPP_  [build/header_guard] [5]
+./include/Map.hpp:77:  #endif line should be "#endif  // DESKTOP_ACMEACKERMANCONTROL_INCLUDE_MAP_HPP_"  [build/header_guard] [5]
+Done processing ./include/Map.hpp
+./include/AckermanKinematicModel.hpp:50:  #ifndef header guard has wrong style, please use: DESKTOP_ACMEACKERMANCONTROL_INCLUDE_ACKERMANKINEMATICMODEL_HPP_  [build/header_guard] [5]
+./include/AckermanKinematicModel.hpp:175:  #endif line should be "#endif  // DESKTOP_ACMEACKERMANCONTROL_INCLUDE_ACKERMANKINEMATICMODEL_HPP_"  [build/header_guard] [5]
+Done processing ./include/AckermanKinematicModel.hpp
+./include/Pid.hpp:51:  #ifndef header guard has wrong style, please use: DESKTOP_ACMEACKERMANCONTROL_INCLUDE_PID_HPP_  [build/header_guard] [5]
+./include/Pid.hpp:162:  #endif line should be "#endif  // DESKTOP_ACMEACKERMANCONTROL_INCLUDE_PID_HPP_"  [build/header_guard] [5]
+Done processing ./include/Pid.hpp
+Total errors found: 6
+
+
+

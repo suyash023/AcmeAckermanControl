@@ -23,6 +23,8 @@ matrix:
 before_install:
   - pip install --user cpp-coveralls
 install:
+  #install boost
+  - sudo apt-get install libboost-all-dev
   - sudo apt-get install -y -qq lcov
   #install eigent
   - sudo apt-get install libeigen3-dev
@@ -34,8 +36,9 @@ install:
   - cd build
   - cmake -D CMAKE_BUILD_TYPE=RELEASE -D BUILD_EXAMPLES=OFF -D BUILD_opencv_apps=OFF -D BUILD_DOCS=OFF -D BUILD_PERF_TESTS=OFF -D BUILD_TESTS=OFF -D CMAKE_INSTALL_PREFIX=/usr/local ..
   - make -j8
-  - sudo make install
-  - cd ../../ 
+
+  - sudo make install 
+  - cd ../../
 
 script:
   - export CXX=$COMPILER;
