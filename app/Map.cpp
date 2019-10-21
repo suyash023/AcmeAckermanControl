@@ -77,6 +77,8 @@ bool Map::UpdateRobotLocation(cv::Point3f coordinates) {
 
     cv::circle(currMapImage, cv::Point(currCoords.x, currCoords.y),
                30.0, cv::Scalar(0, 0, 255), 1, 8, 0);
+    cv::circle(currMapImage, cv::Point(destinationCoords.x, destinationCoords.y),
+                   10.0, cv::Scalar(255, 0, 0), -1, 8, 0);
 
     cv::Point2f center(coordinates.x, coordinates.y);
     cv::Size2f robotSize(length, width);
@@ -115,7 +117,6 @@ bool Map::UpdateRobotLocation(cv::Point3f coordinates) {
     /// using fillConvexPoly to fill rectangle with color
     cv::fillConvexPoly(currMapImage, corners.data(), 4,
                        cv::Scalar(0, 255, 0));
-    std::cout << "Corners: " << corners << std::endl;
     bool b = DisplayMapImage();
     /// Resetting the image
     currMapImage = cv::Mat::zeros(mapBounds.y, mapBounds.x, CV_8UC3);
@@ -174,10 +175,11 @@ bool Map::InitializeMap(cv::Point inMapBounds, double robotLength,
  * @return true or false depending on if robot has reached location
  */
 bool Map::CheckReachedDestination() {
-  if (currCoords == destinationCoords) {
-    return true;
+  if (abs(currCoords.x - destinationCoords.x) < 7 && abs(currCoords.y - destinationCoords.y) < 7) {
+    std::cout << "Robot reached within 7 pixels distance of destination. Exiting!" << std::endl;
+      return true;
   } else {
-    return false;
+      return false;
   }
 }
 
@@ -213,12 +215,10 @@ bool Map::CheckValidCoordinates(cv::Point3f inputCoordinates) {
     rotatedPoints.push_back(rotPoint);
   }
 
-  std::cout << "Rotated points: " << rotatedPoints;
   for (auto p : rotatedPoints) {
     std::cout << (p.y > mapBounds.y);
     std::cout << (p.x > mapBounds.x);
     if (p.x < 0 || p.y < 0 || p.x > mapBounds.x || p.y > mapBounds.y) {
-      std::cout << "Condition failed " << std::endl;
       return false;
     }
   }
@@ -239,7 +239,7 @@ bool Map::DisplayMapImage() {
     cv::namedWindow("Display window", cv::WINDOW_AUTOSIZE);
     /// Show the image inside it
     cv::imshow("Display window", currMapImage);
-    cv::waitKey(0);
+    cv::waitKey(10);
     return true;
   } else {
     std::cout << "Exception: failed to display image.";
