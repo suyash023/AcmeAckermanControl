@@ -3,6 +3,8 @@
 [![Build Status](https://travis-ci.org/suyash023/AcmeAckermanControl.svg?branch=iteration2)](https://travis-ci.org/suyash023/AcmeAckermanControl)
 [![Coverage Status](https://coveralls.io/repos/github/suyash023/AcmeAckermanControl/badge.svg?branch=iteration2)](https://coveralls.io/github/suyash023/AcmeAckermanControl?branch=iteration2)
 ---
+## Acme Ackerman Kinematic Model Demo  
+![Acme Controller Demo](demoVideo/Acme.gif)
 
 ## Project Overview and Description:
 
@@ -36,9 +38,10 @@ Ishan Patel
 Nakul Patel
 Suyash Yeotikar
 
-## Dependencies
-The visualization requires the use of:
+## Libraries Required
 - OpenCV
+- Boost
+- Eigen
 
 ## Standard install via command-line:
 ```
@@ -49,8 +52,18 @@ cd build
 cmake ..
 make
 Run tests: ./test/cpp-test
-Run program: ./app/shell-app
+Run program: ./app/shell-app ../config.txt
 ```
+## Parameters of config file
+Following are the sequence of the user inputs entered in the config file:
+1) Robot wheelbase 
+2) Robot axlewidth
+3) Map bounds
+4) Start coordinates
+5) Destination coordinates
+6) Kp gains for velocity and steering angle
+7) Ki gains for velocity and steering angle
+8) Kd gains for velocity and steering angle
 
 ## Google Sheet for AIP: 
 
