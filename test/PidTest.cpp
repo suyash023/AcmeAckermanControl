@@ -122,7 +122,7 @@ TEST(GetControllerOutputTest, testGetControllerOutputValid) {
 	actualState << 5, 5, 30;
 	Eigen::Vector2d output = testObj.getControllerOutput(targetState,
 			actualState);
-	Eigen::Vector2d test(180, 75);
+	Eigen::Vector2d test(-180,-75);
 	EXPECT_EQ(output[0], test[0]);
 	EXPECT_EQ(output[1], test[1]);
 }
