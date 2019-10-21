@@ -102,7 +102,7 @@ int main(int argc, char *argv[]) {
             tok.begin();
     cv::Point bounds;
     bounds.x = std::atoi((*iter).c_str());
-    iter++;
+  ++iter;
     bounds.y = std::atoi((*iter).c_str());
     checkValid = mapObj.InitializeMap(bounds, length, width);
     if ( !checkValid ||  length*10 > 0.2*bounds.x || width*10 > 0.2*bounds.y ) {
@@ -121,9 +121,9 @@ int main(int argc, char *argv[]) {
             tok1.begin();
     cv::Point3f start;
     start.x = std::atof((*iter1).c_str());
-    iter1++;
+  ++iter1;
     start.y = std::atof((*iter1).c_str());
-    iter1++;
+  ++iter1;
     start.z = std::atof((*iter1).c_str());
     checkValid = mapObj.SetStartCoordinates(start);
     if ( !checkValid ) {
@@ -139,7 +139,7 @@ int main(int argc, char *argv[]) {
             tok2.begin();
     cv::Point3f destination;
     destination.x = std::atof((*iter2).c_str());
-    iter2++;
+  ++iter2;
     destination.y = std::atof((*iter2).c_str());
     destination.z = 0;
     checkValid = mapObj.SetDestinationCoordinates(destination);

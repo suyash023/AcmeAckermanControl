@@ -36,8 +36,8 @@
  * @mainpage
  **/
 
-#ifndef INCLUDE_MAP_HPP_
-#define INCLUDE_MAP_HPP_
+#ifndef ACME_ACKERMAN_CONTROL_INCLUDE_MAP_HPP_
+#define ACME_ACKERMAN_CONTROL_INCLUDE_MAP_HPP_
 
 #include <string>
 #include <opencv2/opencv.hpp>
@@ -74,4 +74,4 @@ class Map {
 };
 
 
-#endif  // INCLUDE_MAP_HPP_
+#endif  // ACME_ACKERMAN_CONTROL_INCLUDE_MAP_HPP_

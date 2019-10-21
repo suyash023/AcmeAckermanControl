@@ -48,8 +48,8 @@
  *
  */
 
-#ifndef INCLUDE_PID_HPP_
-#define INCLUDE_PID_HPP_
+#ifndef ACME_ACKERMAN_CONTROL_INCLUDE_PID_HPP_
+#define ACME_ACKERMAN_CONTROL_INCLUDE_PID_HPP_
 
 #include <eigen3/Eigen/Core>
 #include <iostream>
@@ -159,4 +159,4 @@ class Pid {
   void resetErrors();
 };
 
-#endif  // INCLUDE_PID_HPP_
+#endif  // ACME_ACKERMAN_CONTROL_INCLUDE_PID_HPP_

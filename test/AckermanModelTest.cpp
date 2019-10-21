@@ -73,8 +73,8 @@ TEST(SetAxleWidthTest, testAxleWidthValid) {
 TEST(SetCarVelocitySteeringAngleTest, testSetCarVelocitySteeringAngleValid) {
   AckermanKinematicModel testObj = AckermanKinematicModel();
   Eigen::Vector2d velocityAngle1(25.0, 30.0);
-  bool a1 = testObj.setWheelBase(2.0);
-  bool a2 = testObj.setAxleWidth(1.0);
+  testObj.setWheelBase(2.0);
+  testObj.setAxleWidth(1.0);
   bool b1 = testObj.setCarVelocityAndSteeringAngle(velocityAngle1);
   EXPECT_EQ(true, b1);
   // EXPECT_GT(0, carVel);
@@ -138,10 +138,10 @@ TEST(CalcAckermanParameterTest, testCalcAckermanParameter) {
  */
 TEST(CheckAngleConstraintTest, testCheckAngleConstraint) {
   AckermanKinematicModel testObj = AckermanKinematicModel();
-  bool b1 = testObj.setWheelBase(2.0);
-  bool b2 = testObj.setAxleWidth(1.0);
+  testObj.setWheelBase(2.0);
+  testObj.setAxleWidth(1.0);
   Eigen::Vector2d vec(25.0, 30.0);
-  bool b3 = testObj.setCarVelocityAndSteeringAngle(vec);
+  testObj.setCarVelocityAndSteeringAngle(vec);
   bool b = testObj.checkAngleConstraints();
   EXPECT_EQ(true, b);
 }
