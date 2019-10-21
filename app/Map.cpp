@@ -47,6 +47,7 @@ bool Map::SetStartCoordinates(cv::Point3f inputCoordinates) {
   return b;
 }
 
+
 /**
  * @brief function to set Destination coordinates.
  * @param inputCoordinates Coordinates specific to destination on the map
@@ -73,6 +74,10 @@ bool Map::UpdateRobotLocation(cv::Point3f coordinates) {
   bool val = CheckValidCoordinates(coordinates);
   if (val) {
     currCoords = coordinates;
+
+    cv::circle(currMapImage, cv::Point(currCoords.x, currCoords.y),
+               30.0, cv::Scalar(0, 0, 255), 1, 8, 0);
+
     cv::Point2f center(coordinates.x, coordinates.y);
     cv::Size2f robotSize(length, width);
     float angle = coordinates.z;
@@ -112,6 +117,10 @@ bool Map::UpdateRobotLocation(cv::Point3f coordinates) {
                        cv::Scalar(0, 255, 0));
     std::cout << "Corners: " << corners << std::endl;
     bool b = DisplayMapImage();
+    /// Resetting the image
+    currMapImage = cv::Mat::zeros(mapBounds.y, mapBounds.x, CV_8UC3);
+    /// Resetting the image
+    currMapImage.setTo(cv::Scalar(255, 255, 255));
     return true;
   } else {
     std::cout << "Could not update the coordinates." << std::endl;
@@ -187,7 +196,6 @@ bool Map::CheckValidCoordinates(cv::Point3f inputCoordinates) {
   float angle = inputCoordinates.z;
   /// creating a rotated rectangle for given parameters
   cv::RotatedRect rotatedRectangle = cv::RotatedRect(center, robotSize, angle);
-
   std::vector<cv::Point2f> rectPoints;
   std::vector<cv::Point2f> rotatedPoints;
   rectPoints.push_back(cv::Point2f(-length / 2, -width / 2));
@@ -210,7 +218,7 @@ bool Map::CheckValidCoordinates(cv::Point3f inputCoordinates) {
     std::cout << (p.y > mapBounds.y);
     std::cout << (p.x > mapBounds.x);
     if (p.x < 0 || p.y < 0 || p.x > mapBounds.x || p.y > mapBounds.y) {
-      std::cout << "COndition failed " << std::endl;
+      std::cout << "Condition failed " << std::endl;
       return false;
     }
   }
